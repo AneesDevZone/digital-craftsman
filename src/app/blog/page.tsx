@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { Container } from '@/components/ui/Container'
 import { 
   ArrowRight, 
@@ -304,6 +305,7 @@ function BlogCard({ post, index, onReadMore, isListView = false }: BlogCardProps
 // ============================================
 
 export function BlogSection() {
+  const router = useRouter()
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('All')
   const [isListView, setIsListView] = useState(false)
@@ -321,9 +323,7 @@ export function BlogSection() {
   })
 
   const handleReadMore = (slug: string) => {
-    // Later this will navigate to the full blog post page
-    console.log('Navigate to blog post:', slug)
-    // For now, just scroll to top or show a placeholder
+    router.push(`/blog/${slug}`)
   }
 
   const handleViewAllBlogs = () => {
