@@ -5,7 +5,7 @@ import { Hero } from '@/components/sections/Hero'
 import { ContactSection } from '@/app/contact/page'
 import { AboutSection } from '@/app/about/page'
 import { ServicesSection} from '@/app/services/page'
-import { BlogSection } from '@/app/blog/page'
+import { BlogSection } from './blog/page'
 export default function HomePage() {
   return (
     <>
