@@ -1,5 +1,10 @@
 'use client'
 
+import React, { useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { Container } from '@/components/ui/Container'
+import { blogCategories, blogPosts } from '@/data/blog-posts'
+import { BlogPost } from '@/types/blog'
 import { 
   ArrowRight, 
   Calendar, 
@@ -18,12 +23,6 @@ import {
   List,
   Image as ImageIcon
 } from 'lucide-react'
-
-import React, { useState } from 'react'
-import { useRouter } from 'next/navigation'
-import { Container } from '@/components/ui/Container'
-import { blogCategories, blogPosts } from '@/data/blog-posts'
-
 
 const formatDate = (dateString: string): string => {
   const date = new Date(dateString)

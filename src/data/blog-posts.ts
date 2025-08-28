@@ -1,3 +1,4 @@
+import { BlogCategory, BlogPost } from '@/types/blog'
 import { 
     ArrowRight, 
     Calendar, 
