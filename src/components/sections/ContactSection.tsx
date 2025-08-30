@@ -11,7 +11,7 @@ import {
 
 export function ContactSection() {
   return (
-    <section id="contact" className="min-h-screen flex items-center py-16 bg-gradient-to-br from-slate-50 via-white to-gray-50 relative overflow-hidden">
+    <section id="contact" className="min-h-screen flex items-center py-8 bg-gradient-to-br from-slate-50 via-white to-gray-50 relative overflow-hidden">
       {/* Advanced Background Animations */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {/* Floating geometric shapes */}
@@ -47,30 +47,26 @@ export function ContactSection() {
             <span>Let's Start a Conversation</span>
           </div>
 
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight animate-fade-in-up delay-200">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 leading-tight animate-fade-in-up delay-200">
             Ready to{' '}
             <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent">
               Collaborate?
             </span>
           </h2>
-
-          <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto animate-fade-in-up delay-400">
-          Bring your ideas to life with impactful digital experiences. Let’s discuss your project.
-          </p>
         </div>
 
-        {/* Main Content - Improved Layout */}
-        <div className="max-w-6xl mx-auto grid lg:grid-cols-3 gap-12 items-start">
-          {/* Contact Form - Center, larger */}
-          <div className="lg:col-span-2 order-2 lg:order-1">
-            <ContactForm />
-          </div>
-
-          {/* Contact Info - Right sidebar, compact */}
-          <div className="lg:col-span-1 order-1 lg:order-2">
-            <ContactInfo />
-          </div>
+        {/* Main Content  */}
+      <div className="max-w-6xl mx-auto grid lg:grid-cols-5 gap-12 items-start">
+        {/* Contact Form - 3 parts instead of 2 */}
+        <div className="lg:col-span-3 order-2 lg:order-1">
+          <ContactForm />
         </div>
+
+        {/* Contact Info - 2 parts instead of 1 */}
+        <div className="lg:col-span-2 order-1 lg:order-2">
+          <ContactInfo />
+        </div>
+      </div>
       </Container>
 
       {/* Custom CSS for animations */}

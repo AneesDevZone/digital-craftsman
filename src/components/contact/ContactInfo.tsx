@@ -90,49 +90,54 @@ function ContactItem({ item, index }: ContactItemProps) {
           `} />
         </div>
         
-        {/* Content */}
+        {/* Content - Fixed Layout */}
         <div className="relative z-10 p-6">
-          <div className="flex items-start gap-4">
-            {/* Icon with enhanced animation */}
-            <div className={`
-              p-3 rounded-xl bg-gradient-to-r ${item.gradient} text-white 
-              shadow-lg transition-all duration-500 transform
-              ${isHovered ? 'scale-110 rotate-12 shadow-xl' : 'scale-100 rotate-0'}
-            `}>
-              <item.icon className="w-5 h-5" />
+          <div className="flex items-center gap-4 min-h-[4rem]">
+            {/* Icon - Centered Vertically on Left */}
+            <div className="flex-shrink-0 flex items-center">
+              <div className={`
+                p-3 rounded-xl bg-gradient-to-r ${item.gradient} text-white 
+                shadow-lg transition-all duration-500 transform
+                ${isHovered ? 'scale-110 rotate-12 shadow-xl' : 'scale-100 rotate-0'}
+              `}>
+                <item.icon className="w-6 h-6" />
+              </div>
             </div>
             
-            <div className="flex-1 min-w-0">
+            {/* Content - Center Section */}
+            <div className="flex-1 min-w-0 py-1">
               <h4 className={`
-                font-bold text-gray-900 mb-1 transition-all duration-300
+                font-bold text-gray-900 mb-1 transition-all duration-300 leading-tight
                 ${isHovered ? 'text-lg' : 'text-base'}
               `}>
                 {item.title}
               </h4>
               <p className={`
                 font-semibold bg-gradient-to-r ${item.gradient} 
-                bg-clip-text text-transparent mb-2 transition-all duration-300
+                bg-clip-text text-transparent mb-2 transition-all duration-300 leading-tight
                 ${isHovered ? 'text-base' : 'text-sm'}
               `}>
                 {item.value}
               </p>
-              <p className="text-xs text-gray-600 flex items-center gap-1">
-                <Zap className="w-3 h-3" />
-                {item.description}
+              <p className="text-xs text-gray-600 flex items-center gap-1 leading-tight">
+                <Zap className="w-3 h-3 flex-shrink-0" />
+                <span className="line-clamp-1">{item.description}</span>
               </p>
             </div>
             
-            {/* Arrow indicator with animation */}
-            <div className={`
-              w-8 h-8 rounded-full bg-white/80 backdrop-blur-sm 
-              flex items-center justify-center transition-all duration-300 shadow-sm
-              ${isHovered ? 'translate-x-2 bg-white shadow-lg' : 'translate-x-0'}
-            `}>
+            {/* Arrow - Centered Vertically on Right */}
+            <div className="flex-shrink-0 flex items-center">
               <div className={`
-                w-3 h-3 border-t-2 border-r-2 border-gray-400 
-                transition-all duration-300 transform rotate-45
-                ${isHovered ? 'border-gray-700 scale-110' : ''}
-              `} />
+                w-10 h-10 rounded-full bg-white/80 backdrop-blur-sm 
+                flex items-center justify-center transition-all duration-300 shadow-sm
+                ${isHovered ? 'translate-x-2 bg-white shadow-lg' : 'translate-x-0'}
+              `}>
+                <div className={`
+                  w-3 h-3 border-t-2 border-r-2 border-gray-400 
+                  transition-all duration-300 transform rotate-45
+                  ${isHovered ? 'border-gray-700 scale-110' : ''}
+                `} />
+              </div>
             </div>
           </div>
         </div>
@@ -163,13 +168,12 @@ export function ContactInfo() {
     <div className="space-y-4">
       {/* Header */}
       <div className="text-center lg:text-left mb-8 animate-fade-in-up delay-700">
-        <h3 className="text-2xl font-bold text-gray-900 mb-3 flex items-center gap-3 justify-center lg:justify-start">
+        <h3 className="text-2xl font-bold text-gray-900 mb-3 flex items-center gap-3 justify-center lg:justify-center">
           <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg flex items-center justify-center">
             <Calendar className="w-4 h-4 text-white" />
           </div>
           Get in Touch
         </h3>
-        <p className="text-gray-600">Choose your preferred way to connect</p>
       </div>
       
       {/* Contact Items */}

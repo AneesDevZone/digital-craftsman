@@ -17,7 +17,6 @@ export default function HomePage() {
         <ServicesSection />
         <BlogSection />
         <ContactSection />
-        <SquareRootHero />
       </main>
       <Footer />
     </>
