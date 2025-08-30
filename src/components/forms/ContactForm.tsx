@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
-import { Send, Loader, Sparkles } from 'lucide-react'
+import { Send, Loader, Sparkles, CheckCircle, AlertCircle } from 'lucide-react'
 
 interface FormData {
   name: string
@@ -74,9 +74,6 @@ function FormField({
         {label}
       </label>
       
-      {/* Animated focus ring */}
-     
-      
       {/* Field enhancement animations */}
       {isFocused && (
         <>
@@ -97,6 +94,8 @@ export function ContactForm() {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
+  const [isError, setIsError] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('')
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
@@ -104,23 +103,46 @@ export function ContactForm() {
       ...prev,
       [name]: value
     }))
+    
+    // Clear error state when user starts typing
+    if (isError) {
+      setIsError(false)
+      setErrorMessage('')
+    }
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
+    setIsError(false)
+    setErrorMessage('')
     
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000))
-      
-      setIsSuccess(true)
-      setFormData({ name: '', email: '', subject: '', message: '' })
-      
-      // Reset success state after 3 seconds
-      setTimeout(() => setIsSuccess(false), 3000)
+      // Call our Next.js API route
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+
+      const data = await response.json()
+
+      if (response.ok) {
+        setIsSuccess(true)
+        setFormData({ name: '', email: '', subject: '', message: '' })
+        
+        // Reset success state after 4 seconds
+        setTimeout(() => setIsSuccess(false), 4000)
+      } else {
+        setIsError(true)
+        setErrorMessage(data.error || 'Failed to send message. Please try again.')
+      }
     } catch (error) {
       console.error('Form submission error:', error)
+      setIsError(true)
+      setErrorMessage('Network error. Please check your connection and try again.')
     } finally {
       setIsSubmitting(false)
     }
@@ -147,6 +169,31 @@ export function ContactForm() {
             <h3 className="text-3xl font-bold text-gray-900 mb-2">Tell Me About Your Vision</h3>
             <p className="text-gray-600">I'll respond within 24 hours with a detailed plan</p>
           </div>
+
+          {/* Status Messages */}
+          {isSuccess && (
+            <div className="mb-8 p-4 bg-emerald-50 border-2 border-emerald-200 rounded-2xl">
+              <div className="flex items-center gap-3">
+                <CheckCircle className="w-6 h-6 text-emerald-600 flex-shrink-0" />
+                <div>
+                  <p className="text-emerald-800 font-semibold">Message sent successfully! 🎉</p>
+                  <p className="text-emerald-700 text-sm">I'll get back to you within 24 hours with a detailed response.</p>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {isError && (
+            <div className="mb-8 p-4 bg-red-50 border-2 border-red-200 rounded-2xl">
+              <div className="flex items-center gap-3">
+                <AlertCircle className="w-6 h-6 text-red-600 flex-shrink-0" />
+                <div>
+                  <p className="text-red-800 font-semibold">Failed to send message</p>
+                  <p className="text-red-700 text-sm">{errorMessage}</p>
+                </div>
+              </div>
+            </div>
+          )}
 
           <form onSubmit={handleSubmit} className="space-y-8">
             <div className="grid sm:grid-cols-2 gap-6">
@@ -224,9 +271,7 @@ export function ContactForm() {
                   </>
                 ) : isSuccess ? (
                   <>
-                    <div className="w-6 h-6 rounded-full bg-white flex items-center justify-center">
-                      <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse" />
-                    </div>
+                    <CheckCircle className="w-6 h-6" />
                     <span>Message Sent Successfully!</span>
                     <Sparkles className="w-6 h-6 animate-spin" />
                   </>
