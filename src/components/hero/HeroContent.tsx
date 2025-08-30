@@ -81,7 +81,7 @@ export function HeroContent() {
           <div className="text-gray-600 text-sm">Satisfaction</div>
         </div>
         <div className="text-center">
-          <div className="text-3xl font-bold text-gray-900 mb-1">3+</div>
+          <div className="text-3xl font-bold text-gray-900 mb-1">7+</div>
           <div className="text-gray-600 text-sm">Years Exp</div>
         </div>
       </div>

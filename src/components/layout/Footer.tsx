@@ -12,15 +12,15 @@ export function Footer() {
               href="/"
               className="text-xl lg:text-2xl font-bold text-white hover:text-blue-400 transition-colors"
             >
-              Digital Craftsman
+              Square Root
             </Link>
             <p className="mt-2 text-gray-400">
-              Full-Stack Product Developer
+              Full-Stack Developers Team
             </p>
             
             <div className="flex justify-center space-x-4 mt-6">
               <a
-                href="https://github.com/yourusername"
+                href="https://github.com/AneesDevZone"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 text-gray-400 hover:text-white transition-colors"
@@ -28,7 +28,7 @@ export function Footer() {
                 <Github className="w-5 h-5" />
               </a>
               <a
-                href="https://linkedin.com/in/yourprofile"
+                href="https://www.linkedin.com/in/-anees-ahmad/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 text-gray-400 hover:text-white transition-colors"
@@ -36,7 +36,7 @@ export function Footer() {
                 <Linkedin className="w-5 h-5" />
               </a>
               <a
-                href="mailto:your.email@example.com"
+                href="mailto:anees.ahmad1107@gmail.com"
                 className="p-2 text-gray-400 hover:text-white transition-colors"
               >
                 <Mail className="w-5 h-5" />
@@ -47,7 +47,7 @@ export function Footer() {
         
         <div className="border-t border-gray-800 py-6">
           <p className="text-center text-gray-400 text-sm">
-            © {new Date().getFullYear()} Digital Craftsman. All rights reserved.
+            © {new Date().getFullYear()} Square Root. All rights reserved.
           </p>
         </div>
       </div>

@@ -7,8 +7,8 @@ const contactItems = [
   {
     icon: Mail,
     title: 'Email Me',
-    value: 'hello@digitalcraftsman.dev',
-    href: 'mailto:hello@digitalcraftsman.dev',
+    value: 'anees.ahmad1107@gmail.com',
+    href: 'mailto:anees.ahmad1107@gmail.com',
     description: 'Get a quick response',
     gradient: 'from-blue-500 to-cyan-500',
     bg: 'from-blue-50 to-cyan-50'
@@ -16,8 +16,8 @@ const contactItems = [
   {
     icon: Phone,
     title: 'Call Direct',
-    value: '+1 (555) 123-4567',
-    href: 'tel:+15551234567',
+    value: '+31 63 886 5611',
+    href: 'tel:+31 63 886 5611',
     description: 'Available Mon-Fri',
     gradient: 'from-emerald-500 to-teal-500',
     bg: 'from-emerald-50 to-teal-50'
@@ -25,7 +25,7 @@ const contactItems = [
   {
     icon: MapPin,
     title: 'Location',
-    value: 'San Francisco, CA',
+    value: 'Beltrumbrink, Enschede',
     href: '#',
     description: 'Work globally',
     gradient: 'from-purple-500 to-pink-500',

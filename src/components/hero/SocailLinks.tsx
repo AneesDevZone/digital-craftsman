@@ -6,21 +6,21 @@ import { Github, Linkedin, Mail, Globe } from 'lucide-react'
 const socialLinks = [
   { 
     icon: Github, 
-    href: "https://github.com/yourusername", 
+    href: "https://github.com/AneesDevZone", 
     label: "GitHub", 
     color: "hover:text-gray-900",
     description: "View my code"
   },
   { 
     icon: Linkedin, 
-    href: "https://linkedin.com/in/yourusername", 
+    href: "https://www.linkedin.com/in/-anees-ahmad/", 
     label: "LinkedIn", 
     color: "hover:text-blue-600",
     description: "Connect with me"
   },
   { 
     icon: Mail, 
-    href: "mailto:hello@digitalcraftsman.dev", 
+    href: "mailto:anees.ahmad1107@gmail.com", 
     label: "Email", 
     color: "hover:text-red-500",
     description: "Send me a message"

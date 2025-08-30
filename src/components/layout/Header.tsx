@@ -17,9 +17,9 @@ const navigation = [
 ]
 
 const socialLinks = [
-  { icon: Github, href: 'https://github.com/yourusername', label: 'GitHub' },
-  { icon: Linkedin, href: 'https://linkedin.com/in/yourprofile', label: 'LinkedIn' },
-  { icon: Mail, href: 'mailto:your.email@example.com', label: 'Email' },
+  { icon: Github, href: 'https://github.com/AneesDevZone', label: 'GitHub' },
+  { icon: Linkedin, href: 'https://www.linkedin.com/in/-anees-ahmad/', label: 'LinkedIn' },
+  { icon: Mail, href: 'mailto:anees.ahmad1107@gmail.com', label: 'Email' },
 ]
 
 // ============================================
