@@ -1,20 +1,20 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import { Code, Palette, Zap, Star } from 'lucide-react'
+import Image from 'next/image'
 
 export function HeroImage() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const [isHovered, setIsHovered] = useState(false)
 
-  // Track mouse movement for interactive effects
+  // Track mouse movement for subtle interactions
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       const rect = document.getElementById('hero-image')?.getBoundingClientRect()
       if (rect) {
         setMousePosition({
-          x: ((e.clientX - rect.left) / rect.width - 0.5) * 20,
-          y: ((e.clientY - rect.top) / rect.height - 0.5) * 20
+          x: ((e.clientX - rect.left) / rect.width - 0.5) * 10,
+          y: ((e.clientY - rect.top) / rect.height - 0.5) * 10
         })
       }
     }
@@ -29,179 +29,165 @@ export function HeroImage() {
   return (
     <div className="relative animate-fade-in-up delay-400" id="hero-image">
       <div 
-        className="relative group cursor-pointer"
+        className="relative group"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        {/* Main Container - Increased Size */}
-        <div className="relative w-96 h-96 lg:w-[480px] lg:h-[480px] mx-auto">
+        {/* Clean, Professional Container - Large and Responsive */}
+        <div className="relative w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl xl:max-w-3xl mx-auto">
           
-          {/* 3D Floating Cards Background */}
-          <div className="absolute inset-0">
-            {/* Skill Cards */}
+          {/* Enhanced Background Effects */}
+          <div className="absolute inset-0 z-0">
+            {/* Soft ambient glow behind image */}
             <div 
-              className="absolute top-8 left-4 w-20 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl shadow-xl flex items-center justify-center transform rotate-12 transition-all duration-700"
-              style={{ 
-                transform: `rotate(12deg) translate(${mousePosition.x * 0.5}px, ${mousePosition.y * 0.3}px) ${isHovered ? 'translateZ(20px) scale(1.1)' : ''}`
+              className="absolute top-1/2 left-1/2 w-4/5 h-4/5 transform -translate-x-1/2 -translate-y-1/2 opacity-20 blur-3xl transition-all duration-1000"
+              style={{
+                background: `radial-gradient(ellipse, #3b82f6 0%, #8b5cf6 50%, transparent 70%)`,
+                transform: `translate(-50%, -50%) scale(${isHovered ? '1.2' : '1'})`
               }}
-            >
-              <Code className="w-8 h-8 text-white" />
-            </div>
+            />
             
+            {/* Additional background blur layer */}
             <div 
-              className="absolute top-16 right-6 w-18 h-14 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl shadow-xl flex items-center justify-center transform -rotate-6 transition-all duration-700"
-              style={{ 
-                transform: `rotate(-6deg) translate(${mousePosition.x * -0.4}px, ${mousePosition.y * 0.6}px) ${isHovered ? 'translateZ(15px) scale(1.05)' : ''}`
+              className="absolute top-1/2 left-1/2 w-full h-full transform -translate-x-1/2 -translate-y-1/2 opacity-5 blur-2xl"
+              style={{
+                background: `radial-gradient(circle, #3b82f6 0%, transparent 60%)`,
               }}
-            >
-              <Palette className="w-7 h-7 text-white" />
-            </div>
+            />
             
-            <div 
-              className="absolute bottom-20 left-2 w-16 h-20 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-2xl shadow-xl flex items-center justify-center transform rotate-45 transition-all duration-700"
-              style={{ 
-                transform: `rotate(45deg) translate(${mousePosition.x * 0.7}px, ${mousePosition.y * -0.4}px) ${isHovered ? 'translateZ(25px) scale(1.15)' : ''}`
-              }}
-            >
-              <Zap className="w-6 h-6 text-white" />
-            </div>
-            
-            <div 
-              className="absolute bottom-8 right-4 w-14 h-18 bg-gradient-to-br from-orange-500 to-red-500 rounded-2xl shadow-xl flex items-center justify-center transform -rotate-12 transition-all duration-700"
-              style={{ 
-                transform: `rotate(-12deg) translate(${mousePosition.x * -0.6}px, ${mousePosition.y * 0.5}px) ${isHovered ? 'translateZ(18px) scale(1.08)' : ''}`
-              }}
-            >
-              <Star className="w-6 h-6 text-white" />
-            </div>
-          </div>
-
-          {/* Glassmorphism Container - Increased Size */}
-          <div className="absolute inset-6 rounded-[3rem] bg-white/10 backdrop-blur-2xl border border-white/20 shadow-2xl overflow-hidden group-hover:bg-white/15 transition-all duration-700">
-            
-            {/* Animated Mesh Gradient Background */}
+            {/* Subtle floating particles */}
             <div className="absolute inset-0">
-              <div 
-                className="absolute inset-0 opacity-60 transition-all duration-1000"
-                style={{
-                  background: `
-                    radial-gradient(circle at ${50 + mousePosition.x}% ${50 + mousePosition.y}%, #3b82f6 0%, transparent 50%),
-                    radial-gradient(circle at ${30 - mousePosition.x * 0.5}% ${70 - mousePosition.y * 0.5}%, #8b5cf6 0%, transparent 50%),
-                    radial-gradient(circle at ${70 + mousePosition.x * 0.3}% ${30 + mousePosition.y * 0.7}%, #06b6d4 0%, transparent 50%),
-                    linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(139, 92, 246, 0.1) 50%, rgba(6, 182, 212, 0.1) 100%)
-                  `
-                }}
-              />
-            </div>
-
-            {/* Fancy Tech Image */}
-            <div className="relative z-10 w-full h-full flex items-center justify-center p-8">
-              <div 
-                className="relative w-full h-full max-w-80 max-h-80 rounded-3xl overflow-hidden shadow-2xl transition-all duration-700 group-hover:scale-105"
-                style={{
-                  transform: `translate(${mousePosition.x * 0.2}px, ${mousePosition.y * 0.2}px)`
-                }}
-              >
-                {/* Tech-themed SVG Illustration */}
-                <div className="w-full h-full bg-gradient-to-br from-slate-900 via-blue-900 to-purple-900 flex items-center justify-center relative overflow-hidden">
-                  
-                  {/* Animated Circuit Pattern */}
-                  <svg className="absolute inset-0 w-full h-full opacity-30" viewBox="0 0 400 400">
-                    <defs>
-                      <linearGradient id="circuitGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.8" />
-                        <stop offset="50%" stopColor="#8b5cf6" stopOpacity="0.6" />
-                        <stop offset="100%" stopColor="#06b6d4" stopOpacity="0.8" />
-                      </linearGradient>
-                    </defs>
-                    
-                    {/* Circuit lines */}
-                    <g stroke="url(#circuitGradient)" strokeWidth="2" fill="none">
-                      <path d="M50 50 L150 50 L150 150 L250 150 L250 100 L350 100" className="animate-pulse">
-                        <animate attributeName="stroke-dasharray" values="0 300;150 150;300 0" dur="3s" repeatCount="indefinite" />
-                      </path>
-                      <path d="M100 200 L200 200 L200 300 L300 300" className="animate-pulse" style={{ animationDelay: '1s' }}>
-                        <animate attributeName="stroke-dasharray" values="0 200;100 100;200 0" dur="3s" repeatCount="indefinite" />
-                      </path>
-                      <path d="M50 300 L100 250 L200 250 L250 200 L350 200" className="animate-pulse" style={{ animationDelay: '2s' }}>
-                        <animate attributeName="stroke-dasharray" values="0 250;125 125;250 0" dur="3s" repeatCount="indefinite" />
-                      </path>
-                    </g>
-                    
-                    {/* Circuit nodes */}
-                    <g fill="url(#circuitGradient)">
-                      <circle cx="150" cy="50" r="4" className="animate-pulse" />
-                      <circle cx="250" cy="150" r="4" className="animate-pulse" style={{ animationDelay: '0.5s' }} />
-                      <circle cx="200" cy="200" r="4" className="animate-pulse" style={{ animationDelay: '1s' }} />
-                      <circle cx="300" cy="300" r="4" className="animate-pulse" style={{ animationDelay: '1.5s' }} />
-                      <circle cx="100" cy="250" r="4" className="animate-pulse" style={{ animationDelay: '2s' }} />
-                    </g>
-                  </svg>
-
-                  {/* Central Tech Element */}
-                  <div className="relative z-10 w-32 h-32 lg:w-40 lg:h-40 bg-gradient-to-br from-blue-400/20 to-purple-400/20 rounded-3xl backdrop-blur-sm border border-white/10 flex items-center justify-center">
-                    <div className="w-20 h-20 lg:w-24 lg:h-24 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-xl relative overflow-hidden">
-                      {/* Animated tech symbols */}
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="text-4xl lg:text-5xl text-white font-bold opacity-90">
-                          &lt;/&gt;
-                        </div>
-                      </div>
-                      
-                      {/* Scanning line effect */}
-                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-2000" />
-                    </div>
-                  </div>
-                  
-                  {/* Floating tech particles */}
-                  <div className="absolute inset-0">
-                    {Array.from({ length: 12 }).map((_, i) => (
-                      <div
-                        key={i}
-                        className="absolute w-1 h-1 bg-blue-400/60 rounded-full animate-float"
-                        style={{
-                          left: `${15 + (i * 8) % 70}%`,
-                          top: `${10 + (i * 12) % 80}%`,
-                          animationDelay: `${i * 0.3}s`,
-                          animationDuration: `${2 + Math.random() * 3}s`,
-                          transform: `translate(${mousePosition.x * (0.1 + i * 0.03)}px, ${mousePosition.y * (0.1 + i * 0.03)}px)`
-                        }}
-                      />
-                    ))}
-                  </div>
-                </div>
-                
-                {/* Shimmer Effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-              </div>
-            </div>
-
-            {/* Interactive Particles */}
-            <div className="absolute inset-0 pointer-events-none">
-              {Array.from({ length: 8 }).map((_, i) => (
+              {Array.from({ length: 6 }).map((_, i) => (
                 <div
                   key={i}
-                  className="absolute w-2 h-2 bg-white/40 rounded-full animate-float opacity-60"
+                  className="absolute w-1 h-1 bg-blue-400/20 rounded-full animate-float"
                   style={{
                     left: `${20 + (i * 15) % 60}%`,
-                    top: `${15 + (i * 20) % 70}%`,
-                    animationDelay: `${i * 0.5}s`,
-                    animationDuration: `${3 + Math.random() * 2}s`,
-                    transform: `translate(${mousePosition.x * (0.1 + i * 0.05)}px, ${mousePosition.y * (0.1 + i * 0.05)}px)`
+                    top: `${20 + (i * 20) % 60}%`,
+                    animationDelay: `${i * 1.5}s`,
+                    animationDuration: `${6 + Math.random() * 4}s`,
                   }}
                 />
               ))}
             </div>
           </div>
 
-          {/* Ambient Light Effect */}
+          {/* Main Image Container with Soft Edges */}
+          <div className="relative z-10 w-full aspect-square">
+            {/* Outer container with subtle border radius for edge softening */}
+            <div 
+              className="relative w-full h-full transition-all duration-700 ease-out"
+              style={{
+                transform: `translate(${mousePosition.x * 0.1}px, ${mousePosition.y * 0.1}px) scale(${isHovered ? '1.02' : '1'})`,
+                filter: `drop-shadow(0 20px 40px rgba(0, 0, 0, 0.08)) ${isHovered ? 'drop-shadow(0 25px 50px rgba(59, 130, 246, 0.12))' : ''}`,
+                borderRadius: '8%', // Subtle rounded corners for edge softening
+              }}
+            >
+              {/* Image with soft edges using multiple techniques */}
+              <div className="relative w-full h-full overflow-hidden" style={{ borderRadius: '8%' }}>
+                <Image
+                  src="/herobg.png"
+                  alt="Professional portrait"
+                  fill
+                  className="object-contain transition-all duration-700"
+                  priority
+                  sizes="(max-width: 640px) 90vw, (max-width: 768px) 85vw, (max-width: 1024px) 80vw, (max-width: 1280px) 75vw, 70vw"
+                  style={{
+                    filter: `brightness(${isHovered ? '1.03' : '1'}) contrast(${isHovered ? '1.01' : '1'}) saturate(${isHovered ? '1.05' : '1'})`
+                  }}
+                />
+                
+                {/* Edge softening overlay - creates fade effect at borders */}
+                <div 
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background: `
+                      linear-gradient(0deg, rgba(248,250,252,0.1) 0%, transparent 10%, transparent 90%, rgba(248,250,252,0.1) 100%),
+                      linear-gradient(90deg, rgba(248,250,252,0.1) 0%, transparent 10%, transparent 90%, rgba(248,250,252,0.1) 100%)
+                    `,
+                    borderRadius: '8%'
+                  }}
+                />
+              </div>
+
+              {/* Subtle interactive glow overlay */}
+              <div 
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none"
+                style={{
+                  background: `radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.03) 0%, transparent 70%)`,
+                  borderRadius: '8%'
+                }}
+              />
+            </div>
+          </div>
+
+          {/* Minimal Professional Elements */}
+          <div className="absolute inset-0 pointer-events-none z-20">
+            {/* Professional skill indicators - minimal dots */}
+            <div 
+              className="absolute top-8 right-8 opacity-0 group-hover:opacity-100 transition-all duration-1000 delay-300"
+              style={{ 
+                transform: `translate(${mousePosition.x * -0.2}px, ${mousePosition.y * 0.1}px)`
+              }}
+            >
+              <div className="flex flex-col gap-2">
+                <div className="w-2 h-2 bg-blue-500/60 rounded-full animate-pulse" style={{ animationDelay: '0s', animationDuration: '2s' }} />
+                <div className="w-2 h-2 bg-purple-500/60 rounded-full animate-pulse" style={{ animationDelay: '0.5s', animationDuration: '2s' }} />
+                <div className="w-2 h-2 bg-cyan-500/60 rounded-full animate-pulse" style={{ animationDelay: '1s', animationDuration: '2s' }} />
+              </div>
+            </div>
+
+            {/* Availability badge */}
+            <div 
+              className="absolute bottom-6 left-6 opacity-0 group-hover:opacity-100 transition-all duration-1000 delay-500"
+              style={{ 
+                transform: `translate(${mousePosition.x * 0.1}px, ${mousePosition.y * -0.1}px)`
+              }}
+            >
+              <div className="px-4 py-2 bg-white/95 backdrop-blur-sm border border-gray-200/60 rounded-full shadow-lg">
+                <span className="text-xs font-semibold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                  Available for Projects
+                </span>
+              </div>
+            </div>
+
+            {/* Geometric accent - very subtle */}
+            <div 
+              className="absolute top-12 left-8 opacity-0 group-hover:opacity-60 transition-all duration-1000 delay-700"
+              style={{ 
+                transform: `translate(${mousePosition.x * 0.15}px, ${mousePosition.y * 0.15}px) rotate(${mousePosition.x * 0.3}deg)`
+              }}
+            >
+              <div className="w-4 h-4 border border-blue-300/40 transform rotate-45" />
+            </div>
+
+            {/* Experience indicator */}
+            <div 
+              className="absolute top-1/2 right-6 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-1000 delay-400"
+              style={{ 
+                transform: `translateY(-50%) translate(${mousePosition.x * -0.1}px, ${mousePosition.y * 0.2}px)`
+              }}
+            >
+              <div className="flex flex-col items-end gap-1 text-right">
+                <div className="text-xs text-gray-500 font-medium">3+ Years</div>
+                <div className="w-8 h-0.5 bg-gradient-to-r from-blue-500/60 to-purple-500/60 rounded-full" />
+                <div className="text-xs text-gray-500 font-medium">Experience</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Very subtle scan line effect */}
           <div 
-            className="absolute inset-0 rounded-full opacity-20 blur-3xl transition-all duration-1000 pointer-events-none"
-            style={{
-              background: `radial-gradient(circle at ${50 + mousePosition.x}% ${50 + mousePosition.y}%, #3b82f6 0%, transparent 70%)`,
-              transform: `scale(${isHovered ? '1.2' : '1'})`
-            }}
-          />
+            className="absolute inset-0 pointer-events-none z-15 opacity-0 group-hover:opacity-100 transition-opacity duration-1000"
+          >
+            <div 
+              className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-blue-400/20 to-transparent animate-pulse"
+              style={{ 
+                animationDuration: '4s',
+                transform: `translateY(${50 + mousePosition.y * 2}%)` 
+              }}
+            />
+          </div>
         </div>
       </div>
     </div>

@@ -1,0 +1,82 @@
+# =============================================================================
+# DOCKER COMPOSE CONFIGURATION
+# =============================================================================
+# Manages your containerized application with easy commands
+# Usage: docker-compose up / docker-compose down
+# =============================================================================
+
+version: '3.8'
+
+services:
+  # ==========================================================================
+  # MAIN APPLICATION SERVICE
+  # ==========================================================================
+  app:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    image: my-portfolio:latest
+    container_name: portfolio-app
+    
+    # Port mapping: host:container
+    ports:
+      - "3000:3000"
+    
+    # Environment variables from .env.local file
+    env_file:
+      - .env.local
+    
+    # Additional environment variables (override or add to .env.local)
+    environment:
+      - NODE_ENV=production
+      - NEXT_TELEMETRY_DISABLED=1
+    
+    # Health check
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    
+    # Restart policy
+    restart: unless-stopped
+    
+    # Resource limits (optional - good for learning)
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+
+  # ==========================================================================
+  # FUTURE SERVICES (for later expansion)
+  # ==========================================================================
+  # Uncomment when you add database, Redis, etc.
+  
+  # database:
+  #   image: postgres:15-alpine
+  #   container_name: portfolio-db
+  #   environment:
+  #     POSTGRES_DB: portfolio
+  #     POSTGRES_USER: portfolio_user
+  #     POSTGRES_PASSWORD: ${DB_PASSWORD}
+  #   ports:
+  #     - "5432:5432"
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+  #   restart: unless-stopped
+
+  # redis:
+  #   image: redis:7-alpine
+  #   container_name: portfolio-cache
+  #   ports:
+  #     - "6379:6379"
+  #   restart: unless-stopped
+
+# Future volumes for persistent data
+# volumes:
+#   postgres_data:

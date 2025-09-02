@@ -150,7 +150,7 @@ export function AboutSection() {
                   Ready to transform your vision?
                 </div>
                 <div className="text-slate-600 text-sm">
-                  Let's build something extraordinary together
+                  Let&apos;s build something extraordinary together
                 </div>
               </div>
             </div>

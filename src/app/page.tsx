@@ -7,6 +7,7 @@ import { ServicesSection } from '@/app/services/page'
 import { BlogSection } from './blog/page'
 import { SquareRootHero } from './projects/page'
 import { ModernHero } from '@/components/sections/ModernHero'
+import { ProjectsSection } from '@/components/project/page'
 export default function HomePage() {
   return (
     <>
@@ -15,6 +16,7 @@ export default function HomePage() {
         <ModernHero />
         <AboutSection />
         <ServicesSection />
+        <ProjectsSection />
         <BlogSection />
         <ContactSection />
       </main>

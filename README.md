@@ -1,174 +1,298 @@
 # Digital Craftsman Portfolio
 
-> A modern, responsive portfolio website built with Next.js 15, TypeScript, and Tailwind CSS v4
+A modern full-stack portfolio website built with Next.js, TypeScript, and containerized with Docker.
 
-[![Next.js](https://img.shields.io/badge/Next.js-15.5-black?style=flat-square&logo=next.js)](https://nextjs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.1-38bdf8?style=flat-square&logo=tailwind-css)](https://tailwindcss.com/)
+## Features
 
-## ✨ Features
+- Interactive services showcase with smooth animations
+- Working contact form with email integration
+- Responsive design with glassmorphism effects
+- Blog system (in development)
+- Fully containerized with Docker
 
-- **🚀 Performance First** - Built with Next.js 15 and App Router for optimal performance
-- **📱 Fully Responsive** - Seamless experience across all devices
-- **🎨 Modern Design** - Clean, professional interface with smooth animations
-- **⚡ Fast Loading** - Optimized images, fonts, and code splitting
-- **🔍 SEO Optimized** - Meta tags, structured data, and sitemap
-- **📊 Analytics Ready** - Integrated with Vercel Analytics
-- **♿ Accessible** - WCAG compliant with proper semantic markup
-- **🌙 Contact Forms** - Working contact forms with validation
+## Tech Stack
 
-## 🛠️ Tech Stack
+- **Frontend**: Next.js 13+ (App Router), TypeScript, Tailwind CSS
+- **Backend**: Next.js API Routes
+- **Email**: Nodemailer with Gmail
+- **Containerization**: Docker & Docker Compose
+- **Icons**: Lucide React
 
-### Core
-- **Framework:** Next.js 15 (App Router)
-- **Language:** TypeScript 5.7
-- **Styling:** Tailwind CSS v4
-- **Icons:** Lucide React
+## Quick Start
 
-### Features & Functionality
-- **Animations:** Framer Motion
-- **Forms:** React Hook Form + Zod validation
-- **Code Highlighting:** React Syntax Highlighter
-- **SEO:** Next SEO
-- **Date Handling:** date-fns
-- **Scroll Effects:** React Intersection Observer
+### Prerequisites
 
-### Development
-- **Linting:** ESLint
-- **Code Formatting:** Prettier
-- **Type Checking:** TypeScript strict mode
-- **Dev Tool:** Cursor AI
+- Node.js 18+
+- Docker Desktop
+- Gmail account with App Password
 
-## 🚀 Quick Start
+### Local Development
 
 ```bash
 # Clone the repository
-git clone https://github.com/YOUR_USERNAME/digital-craftsman.git
-
-# Navigate to the project
+git clone <your-repo-url>
 cd digital-craftsman
 
 # Install dependencies
 npm install
 
-# Start development server
+# Set up environment variables
+cp .env.example .env.local
+# Edit .env.local with your Gmail credentials
+
+# Run development server
 npm run dev
+
+# Visit http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-## 📁 Project Structure
-
-```
-src/
-├── app/                 # Next.js App Router pages
-│   ├── about/          # About page
-│   ├── projects/       # Projects gallery & details
-│   ├── services/       # Services for clients
-│   ├── contact/        # Contact page
-│   └── api/            # API routes
-├── components/          # React components
-│   ├── ui/             # Reusable UI components
-│   ├── layout/         # Layout components
-│   ├── sections/       # Homepage sections
-│   └── forms/          # Form components
-├── data/               # Static data & content
-├── lib/                # Utility functions
-├── hooks/              # Custom React hooks
-├── types/              # TypeScript definitions
-└── styles/             # Additional styles
-```
-
-## 🎯 Key Sections
-
-- **Hero Section** - Professional introduction with clear value proposition
-- **Featured Projects** - Showcase of best work with live demos
-- **Capabilities** - Technical skills and expertise areas
-- **Services** - Offerings for potential clients
-- **About** - Professional story and background
-- **Contact** - Multiple ways to get in touch
-
-## 🌟 Highlights
-
-### Multi-Audience Approach
-This portfolio strategically targets three key audiences:
-- **🎯 Job Hunting** - Technical depth, clean code examples, problem-solving approach
-- **💼 Client Acquisition** - Business outcomes, testimonials, clear service offerings
-- **🚀 Personal Branding** - Professional story, values, thought leadership
-
-### Performance Optimizations
-- Next.js Image component for optimized images
-- Font optimization with next/font
-- Code splitting and lazy loading
-- Efficient bundle size with tree shaking
-
-## 📱 Responsive Design
-
-Fully responsive design tested across:
-- Desktop (1920px+)
-- Laptop (1024px - 1919px)
-- Tablet (768px - 1023px)
-- Mobile (320px - 767px)
-
-## 🔧 Available Scripts
+### Docker Development
 
 ```bash
-# Development
-npm run dev          # Start development server
-npm run build        # Build for production
-npm run start        # Start production server
+# Build and run with Docker Compose
+docker compose up
 
-# Code Quality
-npm run lint         # Run ESLint
-npm run type-check   # Check TypeScript types
+# Run in background
+docker compose up -d
 
-# Maintenance
-npm run analyze      # Analyze bundle size
+# View logs
+docker compose logs -f
+
+# Stop containers
+docker compose down
+
+# Rebuild containers
+docker compose up --build
 ```
 
-## 🚀 Deployment
+## Environment Variables
 
-### Vercel (Recommended)
+Create `.env.local` with these variables:
+
+```env
+EMAIL_USER=your-email@gmail.com
+EMAIL_PASS=your-16-character-app-password
+EMAIL_TO=your-email@gmail.com
+NODE_ENV=development
+```
+
+### Gmail App Password Setup
+
+1. Go to [Google Account Security](https://myaccount.google.com/security)
+2. Enable 2-Factor Authentication
+3. Generate App Password for "Mail"
+4. Use the 16-character code in `EMAIL_PASS`
+
+## Docker Commands Reference
+
+### Basic Commands
+
 ```bash
-# Deploy to Vercel
-npx vercel
+# Build image
+docker build -t my-portfolio .
 
-# Or connect your GitHub repository for automatic deployments
+# Run container
+docker run -p 3000:3000 my-portfolio
+
+# List running containers
+docker ps
+
+# Stop container
+docker stop <container-id>
+
+# Remove container
+docker rm <container-id>
+
+# List images
+docker images
+
+# Remove image
+docker rmi <image-id>
 ```
 
-### Other Platforms
-- **Netlify:** Connect GitHub repository
-- **Railway:** Deploy with `railway up`
-- **AWS Amplify:** Connect repository in console
+### Docker Compose Commands
 
-## 📈 Performance
+```bash
+# Start services
+docker compose up
 
-- **Lighthouse Score:** 95+ across all metrics
-- **Core Web Vitals:** Optimized for LCP, FID, and CLS
-- **Bundle Size:** < 200KB initial JavaScript load
-- **Image Optimization:** WebP format with fallbacks
+# Start in background
+docker compose up -d
 
-## 🤝 Contributing
+# Stop services
+docker compose down
 
-This is a personal portfolio project, but feedback and suggestions are welcome!
+# View logs
+docker compose logs
+
+# Follow logs
+docker compose logs -f
+
+# Rebuild and start
+docker compose up --build
+
+# Execute command in running container
+docker compose exec app sh
+
+# Check environment variables
+docker compose exec app env
+```
+
+## Project Structure
+
+```
+digital-craftsman/
+├── src/
+│   ├── app/
+│   │   ├── api/
+│   │   │   ├── contact/route.ts      # Contact form API
+│   │   │   └── health/route.ts       # Health check API
+│   │   ├── globals.css
+│   │   ├── layout.tsx
+│   │   └── page.tsx
+│   ├── components/
+│   │   ├── ui/
+│   │   │   └── Container.tsx
+│   │   ├── hero/                     # Hero section components
+│   │   ├── services/                 # Services section
+│   │   └── contact/                  # Contact form
+│   ├── hooks/
+│   │   └── useContactForm.ts         # Contact form hook
+│   └── lib/
+│       └── blog-utils.ts             # Blog utilities
+├── docker-compose.yml                # Docker Compose config
+├── Dockerfile                        # Docker build instructions
+├── .dockerignore                     # Docker ignore rules
+├── .env.local                        # Environment variables (not in git)
+├── .env.example                      # Environment template
+├── next.config.js                    # Next.js configuration
+└── package.json
+```
+
+## API Endpoints
+
+- `GET /api/health` - Health check endpoint
+- `POST /api/contact` - Contact form submission
+
+## Development Workflow
+
+### Adding New Features
+
+1. **Development**: Work on `localhost:3000` with `npm run dev`
+2. **Testing**: Build locally with `npm run build`
+3. **Containerization**: Test with `docker compose up`
+4. **Commit**: `git add .` and `git commit -m "feat: description"`
+
+### Debugging Docker Issues
+
+```bash
+# Check container logs
+docker compose logs app
+
+# Access container shell
+docker compose exec app sh
+
+# Check environment variables
+docker compose exec app env
+
+# Rebuild from scratch
+docker compose down
+docker compose up --build
+```
+
+## Common Issues & Solutions
+
+### Build Failures
+
+```bash
+# ESLint errors during build
+# Quick fix: Update next.config.js
+module.exports = {
+  eslint: { ignoreDuringBuilds: true },
+  typescript: { ignoreBuildErrors: true }
+}
+
+# Clean build
+npm run build
+```
+
+### Environment Variable Issues
+
+```bash
+# Check .env.local format
+# Ensure no spaces in variable names
+# Example: EMAIL_USER=test@gmail.com (not EMAIL USER=test@gmail.com)
+
+# Verify variables are loaded
+docker compose exec app env | grep EMAIL
+```
+
+### Docker Compose Issues
+
+```bash
+# Permission errors
+sudo chown -R $USER:$USER .
+
+# Port conflicts
+docker compose down
+lsof -ti:3000 | xargs kill -9
+
+# Clean restart
+docker compose down
+docker system prune -f
+docker compose up --build
+```
+
+## Deployment
+
+### Local Production Test
+
+```bash
+# Build production image
+docker compose -f docker-compose.yml up --build
+
+# Test production build
+npm run build && npm start
+```
+
+### Future Cloud Deployment
+
+- AWS ECS/Fargate
+- Google Cloud Run  
+- Azure Container Instances
+- DigitalOcean App Platform
+
+## Learning Resources
+
+### Docker Concepts Learned
+
+1. **Containerization**: Packaging app with dependencies
+2. **Multi-stage builds**: Optimized production images
+3. **Docker Compose**: Multi-container orchestration
+4. **Environment management**: Secure config handling
+5. **Health checks**: Container monitoring
+6. **Resource limits**: CPU/memory constraints
+
+### Next Steps
+
+- [ ] Add database (PostgreSQL)
+- [ ] Implement Redis caching
+- [ ] Set up CI/CD pipeline
+- [ ] Add monitoring/logging
+- [ ] Kubernetes deployment
+
+## Contributing
 
 1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/improvement`)
-3. Commit your changes (`git commit -m 'Add improvement'`)
-4. Push to the branch (`git push origin feature/improvement`)
-5. Open a Pull Request
+2. Create feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit changes (`git commit -m 'Add amazing feature'`)
+4. Push branch (`git push origin feature/amazing-feature`)
+5. Open Pull Request
 
-## 📄 License
+## License
 
-This project is open source and available under the [MIT License](LICENSE).
-
-## 📞 Contact
-
-- **Portfolio:** [your-portfolio-url.com](https://your-portfolio-url.com)
-- **Email:** your.email@example.com
-- **LinkedIn:** [linkedin.com/in/your-profile](https://linkedin.com/in/your-profile)
-- **GitHub:** [@your-username](https://github.com/your-username)
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
-**Built with ❤️ by Anees Ahmad** - Full-Stack Developer crafting digital experiences
+Built with ❤️ by Ahmad

@@ -1,4 +1,5 @@
 'use client'
+import { formatDate, getCategoryIcon, getCategoryColor } from '@/lib/blog-utils'
 
 import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
@@ -24,24 +25,6 @@ import {
   Image as ImageIcon
 } from 'lucide-react'
 
-const formatDate = (dateString: string): string => {
-  const date = new Date(dateString)
-  return date.toLocaleDateString('en-US', { 
-    year: 'numeric', 
-    month: 'long', 
-    day: 'numeric' 
-  })
-}
-
-const getCategoryIcon = (category: string) => {
-  const categoryData = blogCategories.find(cat => cat.name === category)
-  return categoryData ? categoryData.icon : BookOpen
-}
-
-const getCategoryColor = (category: string) => {
-  const categoryData = blogCategories.find(cat => cat.name === category)
-  return categoryData ? categoryData.color : 'text-gray-600'
-}
 
 // ============================================
 // BLOG CARD COMPONENT - Move to components/blog/BlogCard.tsx later
