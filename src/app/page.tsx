@@ -15,8 +15,8 @@ export default function HomePage() {
       <main className="flex-1">
         <ModernHero />
         <AboutSection />
-        <ServicesSection />
         <ProjectsSection />
+        <ServicesSection />
         <BlogSection />
         <ContactSection />
       </main>
