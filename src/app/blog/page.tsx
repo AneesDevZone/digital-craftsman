@@ -268,7 +268,7 @@ export function BlogSection() {
           <div className="flex flex-col lg:flex-row items-center justify-between gap-6 mb-8 animate-fade-in-up delay-200">
             {/* Categories */}
             <div className="flex flex-wrap justify-center lg:justify-start gap-3">
-              <button
+              {/* <button
                 onClick={() => handleCategorySelect('All')}
                 className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 ${
                   selectedCategory === 'All' 
@@ -278,7 +278,7 @@ export function BlogSection() {
               >
                 <BookOpen className="w-4 h-4" />
                 All Posts
-              </button>
+              </button> */}
               {blogCategories.map((category) => {
                 const Icon = category.icon
                 return (
