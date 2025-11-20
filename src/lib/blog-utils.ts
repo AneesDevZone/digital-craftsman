@@ -13,8 +13,6 @@ import {
 // Reusable utility functions for blog functionality
 // Usage: Import these functions across blog components to maintain consistency
 // =============================================================================
-
-
 export const formatDate = (dateString: string): string => {
   const date = new Date(dateString)
   return date.toLocaleDateString('en-US', { 
@@ -23,7 +21,6 @@ export const formatDate = (dateString: string): string => {
     day: 'numeric' 
   })
 }
-
 
 export const formatDateShort = (dateString: string): string => {
   const date = new Date(dateString)

@@ -1,5 +1,32 @@
 import { LucideIcon } from 'lucide-react'
 
+// =============================================================================
+// BLOG TYPE DEFINITIONS
+// =============================================================================
+// Central location for all blog-related TypeScript interfaces
+// Usage: Import these types across blog components for consistency
+// =============================================================================
+
+export interface TOCItem {
+  id: string
+  title: string
+  level: number
+}
+
+export interface RelatedPost {
+  id: string
+  title: string
+  excerpt: string
+  slug: string
+  category: string
+  publishedAt: string
+  readTime: number
+}
+
+export interface BlogPostProps {
+  slug?: string
+}
+
 export interface BlogCategory {
   name: string
   slug: string
@@ -11,7 +38,7 @@ export interface BlogPost {
   id: string
   title: string
   excerpt: string
-  content: string // Rich content with HTML/Markdown
+  content: string
   author: Author
   publishedAt: string
   updatedAt?: string
@@ -36,22 +63,6 @@ export interface Author {
     github?: string
     website?: string
   }
-}
-
-export interface TOCItem {
-  id: string
-  title: string
-  level: number
-}
-
-export interface RelatedPost {
-  id: string
-  title: string
-  excerpt: string
-  slug: string
-  category: string
-  publishedAt: string
-  readTime: number
 }
 
 export interface BlogFilter {
