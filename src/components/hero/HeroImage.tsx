@@ -169,7 +169,7 @@ export function HeroImage() {
               }}
             >
               <div className="flex flex-col items-end gap-1 text-right">
-                <div className="text-xs text-gray-500 font-medium">3+ Years</div>
+                <div className="text-xs text-gray-500 font-medium">7+ Years</div>
                 <div className="w-8 h-0.5 bg-gradient-to-r from-blue-500/60 to-purple-500/60 rounded-full" />
                 <div className="text-xs text-gray-500 font-medium">Experience</div>
               </div>

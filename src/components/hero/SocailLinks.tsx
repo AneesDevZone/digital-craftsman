@@ -9,28 +9,28 @@ const socialLinks = [
     href: "https://github.com/AneesDevZone", 
     label: "GitHub", 
     color: "hover:text-gray-900",
-    description: "View my code"
+    description: "Codebase Access"
   },
   { 
     icon: Linkedin, 
     href: "https://www.linkedin.com/in/-anees-ahmad/", 
     label: "LinkedIn", 
     color: "hover:text-blue-600",
-    description: "Connect with me"
+    description: "Connect Us"
   },
   { 
     icon: Mail, 
     href: "mailto:anees.ahmad1107@gmail.com", 
     label: "Email", 
     color: "hover:text-red-500",
-    description: "Send me a message"
+    description: "Send a message"
   },
   { 
     icon: Globe, 
     href: "#", 
     label: "Portfolio", 
     color: "hover:text-emerald-500",
-    description: "Explore my work"
+    description: "Explore Our Work"
   },
 ]
 

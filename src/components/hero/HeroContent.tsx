@@ -20,7 +20,7 @@ export function HeroContent() {
         <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-gray-900 leading-tight">
           We're{' '}
           <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-            Square Root Studio
+          Square Root Dev
           </span>
         </h1>
 
@@ -52,7 +52,7 @@ export function HeroContent() {
           className="group inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 hover:from-blue-700 hover:via-purple-700 hover:to-pink-700 text-white px-8 py-4 rounded-2xl font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl shadow-blue-500/25"
         >
           <Sparkles className="w-6 h-6 group-hover:rotate-180 transition-transform duration-500" />
-          <span>View My Work</span>
+          <span>View Our Work</span>
           <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform duration-300" />
         </button>
         

@@ -108,7 +108,7 @@ export function Header() {
                   filter: 'drop-shadow(0 0 10px rgba(59, 130, 246, 0.4))'
                 }}
               >
-                SQUARE ROOT
+                SqRoot Dev
                 <Zap className="inline-block w-5 h-5 ml-2 animate-pulse" />
               </span>
             </button>

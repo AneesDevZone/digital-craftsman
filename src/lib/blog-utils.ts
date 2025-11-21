@@ -118,5 +118,5 @@ export const generateSlug = (title: string): string => {
 export const blogConfig = {
   postsPerPage: 6,
   categories: ['Web Development', 'UI/UX Design', 'Mobile Apps', 'Performance'],
-  author: 'Square Root Studio'
+  author: 'Square Root Dev'
 }
