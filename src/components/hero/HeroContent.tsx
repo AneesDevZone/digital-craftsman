@@ -1,38 +1,55 @@
-'use client'
+'use client';
 
-import React from 'react'
-import { ArrowRight, Play, Sparkles } from 'lucide-react'
-import { TypingAnimation } from '@/components/hero/TypingAnimation'
-import { SocialLinks } from '@/components/hero/SocailLinks'
+import React from 'react';
+import { ArrowRight, Play, Sparkles } from 'lucide-react';
+import { TypingAnimation } from '@/components/hero/TypingAnimation';
+import { SocialLinks } from '@/components/hero/SocailLinks';
+
+import { HeroButton } from './HeroButton';
+import { StatItem } from './StatItem';
+
+// --- DATA CONSTANTS (DRY) ---
+const TYPING_TEXTS = [
+  "stunning websites",
+  "mobile apps", 
+  "digital experiences",
+  "innovative solutions"
+];
+
+const STATS_DATA = [
+  { value: "50+", label: "Projects" },
+  { value: "98%", label: "Satisfaction" },
+  { value: "7+", label: "Years Exp" },
+];
+
+// Helper to scroll smoothly (can be moved to a 'utils' file)
+const scrollToSection = (id: string) => {
+  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+};
 
 export function HeroContent() {
   return (
     <div className="text-center lg:text-left space-y-8 relative z-10">
       
-      {/* Available Badge */}
+      {/* 1. Available Badge - Clean */}
       <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/70 backdrop-blur-sm border border-blue-100 rounded-full text-blue-700 text-sm font-medium shadow-sm animate-fade-in">
         <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
         <span>Available for new projects</span>
       </div>
 
-      {/* Main Headlines */}
+      {/* 2. Main Headlines */}
       <div className="space-y-6 animate-fade-in-up delay-200">
         <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-gray-900 leading-tight">
-          We're{' '}
+          We are{' '}
           <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-          Square Root Dev
+            Square Root Dev
           </span>
         </h1>
 
         <div className="text-2xl md:text-3xl lg:text-4xl font-semibold text-gray-700 h-16 flex items-center">
           We create{' '}
           <TypingAnimation 
-            texts={[
-              "stunning websites",
-              "mobile apps", 
-              "digital experiences",
-              "innovative solutions"
-            ]}
+            texts={TYPING_TEXTS} // Using constant here
             className="ml-3 bg-gradient-to-r from-emerald-500 via-blue-500 to-purple-500 bg-clip-text text-transparent"
           />
         </div>
@@ -45,46 +62,37 @@ export function HeroContent() {
         </p>
       </div>
 
-      {/* Action Buttons */}
+      {/* 3. Action Buttons - Cleaner with HeroButton component */}
       <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-up delay-600">
-        <button 
-          onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
-          className="group inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 hover:from-blue-700 hover:via-purple-700 hover:to-pink-700 text-white px-8 py-4 rounded-2xl font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl shadow-blue-500/25"
+        <HeroButton 
+          variant="primary"
+          onClick={() => scrollToSection('projects')}
+          icon={<Sparkles className="w-6 h-6 group-hover:rotate-180 transition-transform duration-500" />}
+          trailingIcon={<ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform duration-300" />}
         >
-          <Sparkles className="w-6 h-6 group-hover:rotate-180 transition-transform duration-500" />
-          <span>View Our Work</span>
-          <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform duration-300" />
-        </button>
+          View Our Work
+        </HeroButton>
         
-        <button 
-          onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-          className="group inline-flex items-center gap-3 bg-white/80 backdrop-blur-sm hover:bg-white text-gray-900 px-8 py-4 rounded-2xl font-semibold text-lg border-2 border-gray-200/50 hover:border-gray-300 transition-all duration-300 hover:scale-105 hover:shadow-xl"
+        <HeroButton 
+          variant="secondary"
+          onClick={() => scrollToSection('contact')}
+          icon={<Play className="w-6 h-6 group-hover:scale-110 transition-transform duration-300" />}
         >
-          <Play className="w-6 h-6 group-hover:scale-110 transition-transform duration-300" />
-          <span>Let's Talk</span>
-        </button>
+          Let's Talk
+        </HeroButton>
       </div>
 
-      {/* Social Links */}
+      {/* 4. Social Links */}
       <div className="animate-fade-in-up delay-800">
         <SocialLinks />
       </div>
       
-      {/* Stats */}
+      {/* 5. Stats - Cleaner with StatItem component */}
       <div className="grid grid-cols-3 gap-8 pt-8 border-t border-gray-200/50 animate-fade-in-up delay-1000">
-        <div className="text-center">
-          <div className="text-3xl font-bold text-gray-900 mb-1">50+</div>
-          <div className="text-gray-600 text-sm">Projects</div>
-        </div>
-        <div className="text-center">
-          <div className="text-3xl font-bold text-gray-900 mb-1">98%</div>
-          <div className="text-gray-600 text-sm">Satisfaction</div>
-        </div>
-        <div className="text-center">
-          <div className="text-3xl font-bold text-gray-900 mb-1">7+</div>
-          <div className="text-gray-600 text-sm">Years Exp</div>
-        </div>
+        {STATS_DATA.map((stat) => (
+          <StatItem key={stat.label} value={stat.value} label={stat.label} />
+        ))}
       </div>
     </div>
-  )
+  );
 }
