@@ -1,41 +1,37 @@
 'use client'
-
 import React, { useState, useEffect, useRef } from 'react'
 import { Container } from '@/components/ui/Container'
-import { 
-  Zap, 
-  Target, 
-  Users,
-  Sparkles
-} from 'lucide-react'
+import { Sparkles } from 'lucide-react'
+import { ABOUT_PRINCIPLES } from '@/data/about-principles' 
+import { PrincipleCard } from '@/components/about/PrincipleCard'
+import { BottomStatement } from '@/components/about/BottomStatement'
 
-const principles = [
-  {
-    icon: Zap,
-    title: 'Innovation First',
-    description: 'Cutting-edge solutions for modern challenges',
-    gradient: 'from-yellow-400 to-orange-500'
-  },
-  {
-    icon: Target,
-    title: 'Results Driven',
-    description: 'Every project delivers measurable business value',
-    gradient: 'from-blue-500 to-purple-600'
-  },
-  {
-    icon: Users,
-    title: 'Client Focused',
-    description: 'Building lasting partnerships through excellence',
-    gradient: 'from-emerald-500 to-teal-600'
+// Helper function to get the staggering class
+const getStaggerClass = (index: number) => {
+  // Sets a vertical offset on large screens to create the staggered/floating look
+  switch (index) {
+    case 1:
+      return 'lg:translate-y-8';
+    case 2:
+      return 'lg:-translate-y-4';
+    default:
+      return 'lg:translate-y-0';
   }
-]
+};
 
 export function AboutSection() {
   const [isVisible, setIsVisible] = useState(false)
   const [activeCard, setActiveCard] = useState<number | null>(null)
   const sectionRef = useRef<HTMLDivElement>(null)
+  // State to track if the client component has mounted (FIX for hydration error)
+  const [isMounted, setIsMounted] = useState(false);
 
+  // Intersection Observer
   useEffect(() => {
+    // 1. Set isMounted to true immediately on client mount/hydration.
+    setIsMounted(true); 
+    
+    // 2. Set up Intersection Observer for visible animation trigger
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -49,8 +45,16 @@ export function AboutSection() {
       observer.observe(sectionRef.current)
     }
 
-    return () => observer.disconnect()
+    return () => {
+      if (sectionRef.current) {
+         observer.unobserve(sectionRef.current);
+      }
+      observer.disconnect()
+    }
   }, [])
+  
+  // The animation state only flips to true if the client is mounted AND the section is in view.
+  const animationIsReady = isVisible && isMounted;
 
   return (
     <section 
@@ -67,6 +71,7 @@ export function AboutSection() {
 
       <Container className="relative z-10">
         <div className="max-w-5xl mx-auto">
+          
           {/* Minimal Header */}
           <div className="text-center mb-20">
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 rounded-full mb-8 group hover:bg-slate-200 transition-all duration-300">
@@ -77,84 +82,35 @@ export function AboutSection() {
             <h2 className="text-5xl lg:text-6xl font-bold text-slate-900 mb-8 leading-tight">
               Digital
               <span className="block text-slate-400">
-                Craftsman
+                Framework
               </span>
             </h2>
             
             <p className="text-xl text-slate-600 max-w-2xl mx-auto">
-              We craft exceptional digital experiences through innovation, 
-              precision, and unwavering commitment to excellence.
+              We craft exceptional digital experiences through innovation, precision, and unwavering commitment to excellence.
             </p>
           </div>
 
-          {/* Floating Cards Layout */}
-          <div className="relative h-96 lg:h-80">
-            {principles.map((principle, index) => {
-              const positions = [
-                { top: '20%', left: '5%' }, // Top left
-                { top: '10%', right: '5%' }, // Top right  
-                { bottom: '20%', left: '50%', transform: 'translateX(-50%)' } // Bottom center
-              ]
-
-              return (
-                <div
-                  key={index}
-                  className={`absolute w-80 group cursor-pointer transition-all duration-700 hover:scale-110 ${
-                    activeCard === index ? 'z-20' : 'z-10'
-                  }`}
-                  style={{
-                    ...positions[index],
-                    opacity: isVisible ? 1 : 0,
-                    transform: `${positions[index].transform || ''} ${isVisible ? 'translateY(0)' : 'translateY(50px)'}`,
-                    transitionDelay: `${index * 300}ms`
-                  }}
-                  onMouseEnter={() => setActiveCard(index)}
-                  onMouseLeave={() => setActiveCard(null)}
-                >
-                  {/* Card Glow Effect */}
-                  <div className={`absolute inset-0 bg-gradient-to-r ${principle.gradient} rounded-3xl opacity-0 group-hover:opacity-20 transition-opacity duration-500 blur-xl`}></div>
-                  
-                  {/* Main Card */}
-                  <div className="relative bg-white rounded-3xl p-8 shadow-lg border border-slate-100 group-hover:shadow-2xl group-hover:border-slate-200 transition-all duration-500">
-                    {/* Floating Icon */}
-                    <div className={`absolute -top-6 left-8 p-4 bg-gradient-to-r ${principle.gradient} rounded-2xl shadow-xl group-hover:rotate-12 group-hover:scale-110 transition-all duration-500`}>
-                      <principle.icon className="w-6 h-6 text-white" />
-                    </div>
-                    
-                    {/* Content */}
-                    <div className="pt-8">
-                      <h3 className="text-2xl font-bold text-slate-900 mb-3 group-hover:text-slate-800 transition-colors duration-300">
-                        {principle.title}
-                      </h3>
-                      <p className="text-slate-600 leading-relaxed group-hover:text-slate-700 transition-colors duration-300">
-                        {principle.description}
-                      </p>
-                    </div>
-
-                    {/* Subtle Accent Line */}
-                    <div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${principle.gradient} rounded-b-3xl transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500`}></div>
-                  </div>
-                </div>
-              )
-            })}
+          {/* Responsive Cards Layout - Now using Grid */}
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-3 lg:gap-8 pt-8">
+            {ABOUT_PRINCIPLES.map((principle, index) => (
+              <div 
+                key={index} 
+                className={`relative transition-transform duration-700 ${getStaggerClass(index)}`}
+              >
+                <PrincipleCard
+                  principle={principle}
+                  index={index}
+                  isVisible={animationIsReady}
+                  activeCard={activeCard}
+                  setActiveCard={setActiveCard}
+                />
+              </div>
+            ))}
           </div>
 
-          {/* Simple Bottom Statement */}
-          <div className={`text-center mt-20 transform transition-all duration-1000 delay-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-            <div className="inline-flex items-center gap-6 px-8 py-6 bg-slate-50 rounded-2xl hover:bg-slate-100 transition-all duration-300 group cursor-pointer">
-              <div className="w-12 h-12 bg-gradient-to-r from-slate-700 to-slate-800 rounded-xl flex items-center justify-center text-white font-bold shadow-lg group-hover:scale-110 transition-transform duration-300">
-                DC
-              </div>
-              <div className="text-left">
-                <div className="text-lg font-semibold text-slate-900">
-                  Ready to transform your vision?
-                </div>
-                <div className="text-slate-600 text-sm">
-                  Let&apos;s build something extraordinary together
-                </div>
-              </div>
-            </div>
-          </div>
+          {/* Simple Bottom Statement - Now a reusable component */}
+          <BottomStatement isVisible={animationIsReady} />
         </div>
       </Container>
     </section>
