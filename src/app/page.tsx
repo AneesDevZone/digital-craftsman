@@ -5,9 +5,8 @@ import ContactSection from '@/app/contact/page'
 import { AboutSection } from '@/app/about/page'
 import { ServicesSection } from '@/app/services/page'
 import { BlogSection } from './blog/page'
-import { SquareRootHero } from './projects/page'
 import { ModernHero } from '@/components/sections/ModernHero'
-import { ProjectsSection } from '@/components/project/page'
+import { ProjectsSection } from '@/app/projects/page'
 export default function HomePage() {
   return (
     <>
