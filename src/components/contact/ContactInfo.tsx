@@ -166,15 +166,7 @@ function ContactItem({ item, index }: ContactItemProps) {
 export function ContactInfo() {
   return (
     <div className="space-y-4">
-      {/* Header */}
-      <div className="text-center lg:text-left mb-8 animate-fade-in-up delay-700">
-        <h3 className="text-2xl font-bold text-gray-900 mb-3 flex items-center gap-3 justify-center lg:justify-center">
-          <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg flex items-center justify-center">
-            <Calendar className="w-4 h-4 text-white" />
-          </div>
-          Get in Touch
-        </h3>
-      </div>
+     
       
       {/* Contact Items */}
       <div className="space-y-3">

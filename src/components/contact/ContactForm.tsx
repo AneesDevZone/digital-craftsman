@@ -162,12 +162,7 @@ export function ContactForm() {
         <div className="relative z-10 p-8 lg:p-12">
           {/* Header */}
           <div className="text-center mb-8">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 rounded-full text-blue-700 text-sm font-medium mb-4">
-              <Sparkles className="w-4 h-4" />
-              <span>Start Your Project</span>
-            </div>
-            <h3 className="text-3xl font-bold text-gray-900 mb-2">Tell Me About Your Vision</h3>
-            <p className="text-gray-600">I'll respond within 24 hours with a detailed plan</p>
+            <h3 className="text-3xl font-bold text-gray-900 mb-2">Get in Touch</h3>
           </div>
 
           {/* Status Messages */}
@@ -305,7 +300,7 @@ export function ContactForm() {
             <div className="flex items-center justify-center gap-8 text-sm text-gray-500">
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-                <span>Usually replies in 1 hour</span>
+                <span>Replies within an hour</span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" />

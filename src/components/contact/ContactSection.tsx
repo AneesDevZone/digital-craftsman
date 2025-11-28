@@ -1,17 +1,28 @@
 'use client'
 
-import React, { useState } from 'react'
-import { Container } from '@/components/ui/Container'
-import { ContactForm } from '@/components/forms/ContactForm'
-import { ContactInfo } from '@/components/contact/ContactInfo'
+import React from 'react'
+import { Container } from '@/components/ui/Container' // Assuming this component exists
+import { ContactForm } from '@/components/contact/ContactForm' // Assuming this component exists
+import { ContactInfo } from '@/components/contact/ContactInfo' // Assuming this component exists
 import { 
   Sparkles,
   MessageCircle
 } from 'lucide-react'
 
+// Note: I am assuming the animation styles (spin-slow, fade-in-up, etc.) 
+// defined in the <style jsx global> block are correct and remain at the end.
+
 export function ContactSection() {
   return (
-    <section id="contact" className="min-h-screen flex items-center py-8 bg-gradient-to-br from-slate-50 via-white to-gray-50 relative overflow-hidden">
+    <section 
+      id="contact" 
+      // FIX 1: Increased vertical padding to ensure breathing room on all screen sizes.
+      // FIX 2: Changed 'overflow-hidden' to 'overflow-y-auto'. 
+      // This ensures that if the content is taller than the viewport (e.g., on mobile), 
+      // the user can scroll to see all of it, preventing the top from being cut off.
+      // The 'flex items-center' still provides vertical centering when the content fits.
+      className="min-h-screen flex items-center py-12 sm:py-20 lg:py-24 bg-gradient-to-br from-slate-50 via-white to-gray-50 relative overflow-x-hidden overflow-y-auto"
+    >
       {/* Advanced Background Animations */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {/* Floating geometric shapes */}
@@ -37,7 +48,7 @@ export function ContactSection() {
         />
       </div>
 
-      <Container size="xl" className="relative z-10">
+      <Container size="xl" className="relative z-10 w-full"> {/* Ensure container uses full width */}
        
 
         {/* Header */}
