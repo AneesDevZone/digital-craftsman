@@ -40,7 +40,7 @@ export function ModernHero() {
   if (!mounted) return null
   
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-50 via-white to-blue-50/30">
+    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white">
       
       {/* Animated Background */}
       <AnimatedBackground />

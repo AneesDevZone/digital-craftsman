@@ -276,7 +276,7 @@ export function ServicesSection() {
       {/* =================================================================== */}
       {/* BACKGROUND ELEMENTS */}
       {/* =================================================================== */}
-      <div className="absolute inset-0 bg-gradient-to-b from-gray-50/50 to-white pointer-events-none" />
+      <div className="absolute inset-0 bg-white pointer-events-none" />
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-gradient-to-br from-blue-100/20 to-purple-100/20 rounded-full blur-3xl" />
       <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-gradient-to-tl from-emerald-100/20 to-cyan-100/20 rounded-full blur-3xl" />
 
