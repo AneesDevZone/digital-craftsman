@@ -113,7 +113,7 @@ export function Header() {
                   textShadow: '0 1px 2px rgba(0, 0, 0, 0.1)'
                 }}
               >
-                SqRoot Dev
+                SQroot Dev
                 <Zap className="inline-block w-5 h-5 ml-2 text-blue-500 animate-pulse" />
               </span>
             </button>

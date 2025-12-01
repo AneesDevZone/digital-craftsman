@@ -3,65 +3,75 @@
 import React from 'react'
 import { Github, Linkedin, Mail, Globe } from 'lucide-react'
 
+// Define a professional and DRY structure for link data
 const socialLinks = [
   { 
     icon: Github, 
     href: "https://github.com/AneesDevZone", 
     label: "GitHub", 
-    color: "hover:text-gray-900",
+    hoverColor: "hover:text-[#181717]", // Darker color for GitHub
     description: "Codebase Access"
   },
   { 
     icon: Linkedin, 
     href: "https://www.linkedin.com/in/-anees-ahmad/", 
     label: "LinkedIn", 
-    color: "hover:text-blue-600",
-    description: "Connect Us"
+    hoverColor: "hover:text-blue-600",
+    description: "Connect via LinkedIn"
   },
   { 
     icon: Mail, 
     href: "mailto:anees.ahmad1107@gmail.com", 
     label: "Email", 
-    color: "hover:text-red-500",
+    hoverColor: "hover:text-red-500",
     description: "Send a message"
   },
   { 
     icon: Globe, 
     href: "#", 
     label: "Portfolio", 
-    color: "hover:text-emerald-500",
-    description: "Explore Our Work"
+    hoverColor: "hover:text-emerald-500",
+    description: "Explore My Work"
   },
 ]
 
 export function SocialLinks() {
   return (
-    <div className="flex items-center gap-4">
+    <div className="flex items-center justify-center gap-3 sm:gap-4 p-4">
       {socialLinks.map((link, index) => (
         <a
           key={link.label}
           href={link.href}
+          // 1. CRITICAL FIX: Explicitly set a base text color (text-gray-700)
+          //    This forces the SVG icon (which uses currentColor) to be dark 
+          //    consistently across Chrome, Edge, and other browsers.
           className={`
-            group relative p-3 bg-white/80 backdrop-blur-sm border border-gray-200/50 
-            rounded-xl shadow-sm transition-all duration-300 
-            ${link.color} hover:shadow-lg hover:scale-110 hover:-translate-y-1
-            animate-fade-in-up
+            group relative p-3 sm:p-4 bg-white/70 backdrop-blur-md 
+            rounded-full transition-all duration-300 shadow-md 
+            text-gray-700 focus:outline-none focus:ring-4 focus:ring-indigo-300
+            ${link.hoverColor} hover:shadow-xl hover:scale-110 
+            hover:-translate-y-1 transform
           `}
-          style={{ animationDelay: `${1200 + index * 100}ms` }}
+          // Use index for staggered animation delay
+          style={{ animationDelay: `${100 * index}ms` }}
+          // Conditional attributes for external links (professional and secure)
           target={link.href.startsWith('http') ? "_blank" : undefined}
           rel={link.href.startsWith('http') ? "noopener noreferrer" : undefined}
           aria-label={link.label}
         >
-          <link.icon className="w-5 h-5 transition-transform duration-300 group-hover:scale-110" />
+          {/* Icon inherits color from parent <a> */}
+          <link.icon className="w-5 h-5 transition duration-300" />
           
-          {/* Tooltip */}
-          <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 px-2 py-1 bg-gray-900 text-white text-xs rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+          {/* Tooltip (Enhanced contrast and position) */}
+          <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 
+                        px-3 py-1 bg-gray-800 text-white text-xs font-medium rounded-lg 
+                        whitespace-nowrap opacity-0 group-hover:opacity-100 
+                        transition-opacity duration-300 pointer-events-none z-10">
             {link.description}
-            <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900"></div>
+            {/* Tooltip arrow */}
+            <div className="absolute top-full left-1/2 transform -translate-x-1/2 
+                          w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-800"></div>
           </div>
-          
-          {/* Ripple effect */}
-          <div className="absolute inset-0 rounded-xl bg-current opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
         </a>
       ))}
     </div>
