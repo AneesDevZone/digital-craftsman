@@ -25,7 +25,7 @@ const contactItems = [
   {
     icon: MapPin,
     title: 'Location',
-    value: 'Beltrumbrink, Enschede',
+    value: 'Enschede, Netherlands',
     href: '#',
     description: 'Work globally',
     gradient: 'from-purple-500 to-pink-500',

@@ -1,9 +1,9 @@
-import { Header } from '@/components/layout/Header'
+import Header from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { ClientScrollHandler } from '@/components/layout/ClientScrollHandler' 
 
 import ContactSection from '@/app/contact/page'
-import { AboutSection } from '@/app/about/page'
+import AboutPage from '@/app/about/page'
 import { ServicesSection } from '@/app/services/page'
 import { BlogSection } from './blog/page'
 import { ModernHero } from '@/components/hero/ModernHero'
@@ -12,21 +12,19 @@ import { ProjectsSection } from '@/app/projects/page'
 export default function HomePage() {
   return (
     <>
-      {/* Add the client-side scroll handler. 
+      {/* The client-side scroll handler. 
           It runs on the client and scrolls to the hash in the URL on page load. */}
       <ClientScrollHandler />
       
       <Header />
       <main className="flex-1">
-        {/* Wrapped each section and assign a unique 'id'. 
-          These IDs MUST match the '#hash' values used in Header navigation links.
-        */}
+        
         <section id="home"> 
           <ModernHero />
         </section>
         
-        <section id="about">
-          <AboutSection />
+        <section id="about" className="scroll-mt-16">
+          <AboutPage />
         </section>
         
         <section id="projects">

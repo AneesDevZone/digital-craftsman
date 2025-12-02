@@ -3,13 +3,12 @@
 import React from 'react'
 import { Github, Linkedin, Mail, Globe } from 'lucide-react'
 
-// Define a professional and DRY structure for link data
 const socialLinks = [
   { 
     icon: Github, 
     href: "https://github.com/AneesDevZone", 
     label: "GitHub", 
-    hoverColor: "hover:text-[#181717]", // Darker color for GitHub
+    hoverColor: "hover:text-[#181717]", 
     description: "Codebase Access"
   },
   { 
@@ -42,9 +41,6 @@ export function SocialLinks() {
         <a
           key={link.label}
           href={link.href}
-          // 1. CRITICAL FIX: Explicitly set a base text color (text-gray-700)
-          //    This forces the SVG icon (which uses currentColor) to be dark 
-          //    consistently across Chrome, Edge, and other browsers.
           className={`
             group relative p-3 sm:p-4 bg-white/70 backdrop-blur-md 
             rounded-full transition-all duration-300 shadow-md 
