@@ -1,8 +1,28 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+   /* Base */
+   --color-bg-primary: #0E0E0E;
+   --color-bg-surface: #403963;
+ 
+   /* Text */
+   --color-text-primary: #EAD094;
+   --color-text-secondary: #B2DCE2;
+   --color-text-muted: #D7EAAC;
+   --background: #ffffff;
+ 
+   /* Brand */
+   --color-brand-primary: #6596F3;   /* Tech / links / highlights */
+   --color-brand-accent: #D3045D;    /* CTA / emphasis */
+ 
+   /* States */
+   --color-success: #83B366;
+   --color-warning: #EAD094;
+   --color-danger: #F3000E;
+ 
+   /* Creative / Decorative */
+   --color-decorative-purple: #D3A4EA;
+   --color-decorative-dark: #64242F;
 }
 
 @theme inline {

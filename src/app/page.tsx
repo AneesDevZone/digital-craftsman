@@ -1,5 +1,3 @@
-import Header from '@/components/layout/Header'
-import { Footer } from '@/components/layout/Footer'
 import { ClientScrollHandler } from '@/components/layout/ClientScrollHandler' 
 
 import ContactSection from '@/app/contact/page'
@@ -16,7 +14,6 @@ export default function HomePage() {
           It runs on the client and scrolls to the hash in the URL on page load. */}
       <ClientScrollHandler />
       
-      <Header />
       <main className="flex-1">
         
         <section id="home"> 
@@ -43,7 +40,6 @@ export default function HomePage() {
           <ContactSection />
         </section>
       </main>
-      <Footer />
     </>
   )
 }
