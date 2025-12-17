@@ -4,7 +4,7 @@ import ContactSection from '@/app/contact/page'
 import AboutPage from '@/app/about/page'
 import { ServicesSection } from '@/app/services/page'
 import { BlogSection } from './blog/page'
-import { ModernHero } from '@/components/hero/ModernHero'
+import HeroSection from '@/components/hero/ModernHero'
 import { ProjectsSection } from '@/app/projects/page'
 
 export default function HomePage() {
@@ -17,7 +17,7 @@ export default function HomePage() {
       <main className="flex-1">
         
         <section id="home"> 
-          <ModernHero />
+          <HeroSection />
         </section>
         
         <section id="about" className="scroll-mt-16">

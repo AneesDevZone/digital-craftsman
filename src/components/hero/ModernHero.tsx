@@ -1,143 +1,257 @@
-'use client'
+"use client"
 
-import React, { useState, useEffect } from 'react'
-import { Container } from '@/components/ui/Container'
-import { HeroContent } from '@/components/hero/HeroContent'
-import { HeroImage } from '@/components/hero/HeroImage'
-import { AnimatedBackground } from '@/components/hero/AnimatedBackground'
-import { ScrollIndicator } from '@/components/ui/ScrollIndicator'
-import { 
-  Code, 
-  Palette, 
+import React from "react"
+import {
+  ArrowRight,
+  Sparkles,
+  Layers,
   Zap,
-  Star,
-  Circle,
-  Triangle
-} from 'lucide-react'
+  Shield,
+} from "lucide-react"
 
-// Floating shapes configuration
-const floatingShapes = [
-  { icon: Code, delay: '0s', position: 'top-20 left-16', size: 'w-8 h-8', color: 'text-blue-400/40', animation: 'animate-bounce' },
-  { icon: Palette, delay: '0.5s', position: 'top-32 right-20', size: 'w-6 h-6', color: 'text-purple-400/50', animation: 'animate-pulse' },
-  { icon: Zap, delay: '1s', position: 'bottom-32 left-20', size: 'w-7 h-7', color: 'text-yellow-400/45', animation: 'animate-spin' },
-  { icon: Star, delay: '1.5s', position: 'bottom-40 right-16', size: 'w-5 h-5', color: 'text-pink-400/60', animation: 'animate-ping' },
-  { icon: Circle, delay: '2s', position: 'top-1/2 left-8', size: 'w-6 h-6', color: 'text-emerald-400/40', animation: 'animate-bounce' },
-  { icon: Triangle, delay: '2.5s', position: 'top-1/3 right-12', size: 'w-8 h-8', color: 'text-cyan-400/35', animation: 'animate-pulse' },
-]
+/* ============================================================================
+   PRIMITIVES (DRY)
+============================================================================ */
 
-export function ModernHero() {
-  const [mounted, setMounted] = useState(false)
-  
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-  
-  const scrollToNext = () => {
-    const nextSection = document.querySelector('#about, #projects, #services, #blog')
-    nextSection?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-  }
-  
-  if (!mounted) return null
-  
+const Container = ({
+  children,
+  className = "",
+}: {
+  children: React.ReactNode
+  className?: string
+}) => (
+  <div className={`mx-auto max-w-[1400px] px-6 lg:px-12 ${className}`}>
+    {children}
+  </div>
+)
+
+const Glass = ({
+  children,
+  className = "",
+}: {
+  children: React.ReactNode
+  className?: string
+}) => (
+  <div
+    className={`relative backdrop-blur-xl border transition-all duration-300 ${className}`}
+    style={{
+      backgroundColor: "color-mix(in srgb, var(--color-bg-surface) 70%, transparent)",
+      borderColor: "var(--color-border)",
+      boxShadow: "var(--shadow-lg)",
+      borderRadius: "var(--radius-lg)",
+    }}
+  >
+    {children}
+  </div>
+)
+
+const Glow = ({
+  className = "",
+  color,
+}: {
+  className?: string
+  color: string
+}) => (
+  <div
+    className={`absolute rounded-full blur-3xl opacity-40 ${className}`}
+    style={{ background: color }}
+  />
+)
+
+/* ============================================================================
+   ILLUSTRATION
+============================================================================ */
+
+const BusinessIllustration = () => {
   return (
-    <section id="hero" className="relative min-h-screen flex items-center pt-16 lg:pt-20 justify-center overflow-hidden bg-white">
-      
-      {/* Animated Background */}
-      <AnimatedBackground />
-      
-      {/* Floating Elements */}
-      {floatingShapes.map((element, index) => (
-        <div
-          key={index}
-          className={`absolute hidden lg:block ${element.position} ${element.color} ${element.animation}`}
-          style={{ 
-            animationDelay: element.delay,
-            animationDuration: '3s',
-            animationIterationCount: 'infinite'
-          }}
-        >
-          <element.icon className={element.size} />
+    <div className="relative flex items-center justify-center min-h-[420px]">
+      <Glass className="w-full max-w-md p-6 sm:p-8 hover:scale-[1.03]">
+        {/* Browser bar */}
+        <div className="flex items-center gap-2 mb-5">
+          <div className="flex gap-1.5">
+            <span className="w-3 h-3 rounded-full bg-[var(--color-danger)]" />
+            <span className="w-3 h-3 rounded-full bg-[var(--color-warning)]" />
+            <span className="w-3 h-3 rounded-full bg-[var(--color-success)]" />
+          </div>
+          <div className="ml-2 h-6 flex-1 rounded bg-[var(--color-bg-primary)]" />
         </div>
-      ))}
 
-      <Container size="xl">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          
-          {/* Left Column - Content */}
-          <HeroContent />
+        {/* Content */}
+        <div className="space-y-4">
+          <div
+            className="h-8 rounded"
+            style={{
+              background: "var(--gradient-brand-primary)",
+              width: "70%",
+            }}
+          />
+          <div className="h-4 rounded bg-[var(--color-border)] w-[90%]" />
+          <div className="h-4 rounded bg-[var(--color-border)] w-[75%]" />
 
-          {/* Right Column - Hero Image */}
-          <HeroImage />
+          <div className="grid grid-cols-2 gap-3 pt-4">
+            <div className="rounded-lg p-4 bg-[var(--color-bg-primary)]">
+              <Layers className="w-5 h-5 text-[var(--color-brand-primary)]" />
+              <div className="h-2 mt-3 rounded bg-[var(--color-border)] w-[80%]" />
+            </div>
+            <div className="rounded-lg p-4 bg-[var(--color-bg-primary)]">
+              <Zap className="w-5 h-5 text-[var(--color-brand-accent)]" />
+              <div className="h-2 mt-3 rounded bg-[var(--color-border)] w-[70%]" />
+            </div>
+          </div>
+        </div>
+
+        {/* Floating icons */}
+        <Glass className="absolute -top-5 -right-5 w-14 h-14 flex items-center justify-center animate-float">
+          <Shield className="w-7 h-7 text-[var(--color-brand-signature)]" />
+        </Glass>
+
+        <Glass className="absolute -bottom-4 -left-4 w-12 h-12 flex items-center justify-center animate-float-delayed">
+          <Sparkles className="w-6 h-6 text-[var(--color-brand-accent)]" />
+        </Glass>
+      </Glass>
+
+      <Glow
+        className="inset-0 -z-10"
+        color="radial-gradient(circle, var(--color-brand-primary), transparent 70%)"
+      />
+    </div>
+  )
+}
+
+/* ============================================================================
+   HERO
+============================================================================ */
+
+export default function HeroSection() {
+  const scrollTo = (id: string) =>
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" })
+
+  return (
+    <section
+      id="hero"
+      className="relative min-h-screen flex items-center pt-28 pb-20 overflow-hidden"
+      style={{
+        background: `linear-gradient(
+          135deg,
+          var(--color-bg-primary),
+          var(--color-bg-surface),
+          var(--color-bg-primary)
+        )`,
+      }}
+    >
+      {/* Ambient glows */}
+      <Glow
+        className="top-24 right-20 w-96 h-96"
+        color="radial-gradient(circle, var(--color-brand-primary), transparent 70%)"
+      />
+      <Glow
+        className="bottom-20 left-16 w-80 h-80"
+        color="radial-gradient(circle, var(--color-brand-accent), transparent 70%)"
+      />
+
+      <Container className="relative z-10">
+        <div className="grid lg:grid-cols-2 gap-14 items-center">
+          {/* LEFT */}
+          <div className="space-y-8">
+            {/* Badge */}
+            <Glass className="inline-flex items-center gap-2 px-4 py-2 rounded-full">
+              <span className="w-2 h-2 rounded-full bg-[var(--color-brand-signature)] animate-pulse" />
+              <span className="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-secondary)]">
+                Premium Digital Solutions
+              </span>
+            </Glass>
+
+            {/* Heading */}
+            <h1 className="text-4xl sm:text-5xl xl:text-7xl font-extrabold leading-tight">
+              Craft Digital Excellence{" "}
+              <span
+                className="block"
+                style={{
+                  background: "var(--gradient-brand-primary)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                }}
+              >
+                That Delivers
+              </span>
+            </h1>
+
+            <p className="text-lg sm:text-xl text-[var(--color-text-secondary)] max-w-xl">
+              Modern web and mobile solutions built with production-grade
+              technology. From startups to enterprises.
+            </p>
+
+            {/* Stats */}
+            <div className="grid grid-cols-3 gap-4 max-w-md">
+              {[
+                { icon: Layers, label: "Full-Stack" },
+                { icon: Zap, label: "Fast" },
+                { icon: Shield, label: "Secure" },
+              ].map(({ icon: Icon, label }) => (
+                <Glass key={label} className="p-4 text-center">
+                  <Icon className="w-6 h-6 mx-auto mb-2 text-[var(--color-brand-primary)]" />
+                  <div className="text-sm font-semibold">{label}</div>
+                </Glass>
+              ))}
+            </div>
+
+            {/* Pricing */}
+            <div className="flex items-baseline gap-3">
+              <span className="text-sm uppercase tracking-wider text-[var(--color-text-secondary)]">
+                Starting at
+              </span>
+              <span className="text-5xl font-black text-[var(--color-brand-primary)]">
+                €199
+              </span>
+            </div>
+
+            {/* CTA */}
+            <div className="flex flex-col sm:flex-row gap-4">
+              <button
+                onClick={() => scrollTo("contact")}
+                className="px-8 py-4 rounded-[var(--radius-md)] font-semibold text-[var(--color-text-inverse)] hover:-translate-y-1 transition"
+                style={{
+                  background: "var(--gradient-brand-primary)",
+                  boxShadow: "0 10px 30px rgba(79,107,237,.35)",
+                }}
+              >
+                <span className="flex items-center gap-2 justify-center">
+                  Get Started <ArrowRight className="w-5 h-5" />
+                </span>
+              </button>
+
+              <Glass>
+                <button
+                  onClick={() => scrollTo("projects")}
+                  className="px-8 py-4 w-full rounded-[var(--radius-md)] font-semibold"
+                >
+                  View Projects →
+                </button>
+              </Glass>
+            </div>
+          </div>
+
+          {/* RIGHT */}
+          <BusinessIllustration />
         </div>
       </Container>
 
-      {/* Scroll Indicator */}
-      <ScrollIndicator onClick={scrollToNext} />
-
-      {/* Custom CSS for Additional Animations */}
-      <style jsx global>{`
-        @keyframes grid-move {
-          0% { transform: translate(0, 0); }
-          100% { transform: translate(100px, 100px); }
-        }
-        
+      {/* Animations */}
+      <style jsx>{`
         @keyframes float {
-          0%, 100% { transform: translateY(0px) translateX(0px); }
-          25% { transform: translateY(-10px) translateX(5px); }
-          50% { transform: translateY(-5px) translateX(-5px); }
-          75% { transform: translateY(-15px) translateX(10px); }
-        }
-        
-        @keyframes spin-slow {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-        
-        @keyframes spin-reverse {
-          from { transform: rotate(360deg); }
-          to { transform: rotate(0deg); }
-        }
-        
-        .animate-spin-slow {
-          animation: spin-slow 10s linear infinite;
-        }
-        
-        .animate-spin-reverse {
-          animation: spin-reverse 15s linear infinite;
-        }
-        
-        .animate-float {
-          animation: float 6s ease-in-out infinite;
-        }
-        
-        .animate-fade-in {
-          animation: fade-in 0.8s ease-out;
-        }
-        
-        .animate-fade-in-up {
-          animation: fade-in-up 1s ease-out;
-        }
-        
-        .delay-200 { animation-delay: 200ms; }
-        .delay-400 { animation-delay: 400ms; }
-        .delay-600 { animation-delay: 600ms; }
-        .delay-800 { animation-delay: 800ms; }
-        .delay-1000 { animation-delay: 1000ms; }
-        
-        @keyframes fade-in {
-          from { opacity: 0; }
-          to { opacity: 1; }
-        }
-        
-        @keyframes fade-in-up {
-          from { 
-            opacity: 0;
-            transform: translateY(30px);
-          }
-          to { 
-            opacity: 1;
+          0%,
+          100% {
             transform: translateY(0);
           }
+          50% {
+            transform: translateY(-18px);
+          }
+        }
+        .animate-float {
+          animation: float 3s ease-in-out infinite;
+        }
+        .animate-float-delayed {
+          animation: float 4s ease-in-out infinite;
         }
       `}</style>
     </section>
