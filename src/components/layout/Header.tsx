@@ -1,289 +1,173 @@
 "use client"
-import React, { useState, useEffect } from 'react'
-import { Menu, X, Github, Linkedin, Mail } from 'lucide-react'
 
-// ============================================
-// TYPES
-// ============================================
-type NavItem = {
-  name: string;
-  href: string;
-}
+import React, { useState, useEffect } from "react"
+import { Menu, X, ArrowRight, Github, Linkedin } from "lucide-react"
 
-type SocialLink = {
-  icon: React.ElementType;
-  href: string;
-  label: string;
-}
+/* ============================================
+   TYPES & CONFIG
+============================================ */
+type NavItem = { name: string; href: string }
 
-// ============================================
-// CONFIGURATION
-// ============================================
-const navigation: NavItem[] = [
-  { name: 'Home', href: '#hero' },
-  { name: 'About', href: '#about' },
-  { name: 'Projects', href: '#projects' },
-  { name: 'Services', href: '#services' },
-  { name: 'Blog', href: '#blog' },
-  { name: 'Contact', href: '#contact' },
+const NAVIGATION: NavItem[] = [
+  { name: "Home", href: "#hero" },
+  { name: "About", href: "#about" },
+  { name: "Projects", href: "#projects" },
+  { name: "Services", href: "#services" },
+  { name: "Blog", href: "#blog" },
+  { name: "Contact", href: "#contact" },
 ]
 
-const socialLinks: SocialLink[] = [
-  { icon: Github, href: 'https://github.com/AneesDevZone', label: 'GitHub' },
-  { icon: Linkedin, href: 'https://www.linkedin.com/in/-anees-ahmad/', label: 'LinkedIn' },
-  { icon: Mail, href: 'mailto:anees.ahmad1107@gmail.com', label: 'Email' },
-]
+/* ============================================
+   SUB-COMPONENTS
+============================================ */
 
-// ============================================
-// REUSABLE COMPONENTS
-// ============================================
-const Container = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => (
-  <div className={`mx-auto px-6 lg:px-12 max-w-[1400px] ${className}`}>
-    {children}
+/**
+ * Clean SQ Logo
+ */
+const Logo = () => (
+  <div className="flex items-center gap-2 group cursor-pointer">
+    <div 
+      className="w-9 h-9 flex items-center justify-center rounded-md font-sans text-sm font-black tracking-tighter transition-transform duration-300 group-hover:scale-105"
+      style={{ 
+        background: "var(--gradient-brand-primary)", 
+        color: "var(--color-text-inverse)" 
+      }}
+    >
+      SQ
+    </div>
+    {/* Hidden on mobile, visible on desktop */}
+    <span className="hidden sm:block text-sm font-bold tracking-tight uppercase" style={{ color: "var(--color-text-primary)" }}>
+      Square Root Dev
+    </span>
   </div>
 )
 
-const Logo = ({ onClick }: { onClick: () => void }) => (
-  <button
-    onClick={onClick}
-    className="group relative flex items-center gap-3 transition-all duration-300"
-  >
-    <div className="relative">
-      <div className="w-10 h-10 bg-neutral-900 rounded-lg flex items-center justify-center transition-all duration-500 group-hover:rounded-xl group-hover:scale-105">
-        <span className="text-white font-bold text-lg">SQ</span>
-      </div>
-      <div className="absolute inset-0 bg-neutral-900 rounded-lg blur-md opacity-0 group-hover:opacity-30 transition-opacity duration-300" />
-    </div>
-    <span className="text-xl font-semibold text-neutral-900 tracking-tight hidden sm:block">
-      Root Dev
-    </span>
-  </button>
-)
-
-const NavLink = ({ 
-  item, 
-  isActive, 
-  onClick 
-}: { 
-  item: NavItem; 
-  isActive: boolean; 
-  onClick: () => void 
-}) => (
-  <button
-    onClick={onClick}
-    className="group relative px-4 py-2 transition-all duration-200"
-  >
-    <span className={`text-[15px] font-medium transition-colors duration-200 ${
-      isActive 
-        ? 'text-neutral-900' 
-        : 'text-neutral-500 group-hover:text-neutral-900'
-    }`}>
-      {item.name}
-    </span>
-    
-    <div className={`absolute bottom-0 left-4 right-4 h-[2px] bg-neutral-900 transition-all duration-300 ${
-      isActive 
-        ? 'opacity-100 scale-x-100' 
-        : 'opacity-0 scale-x-0 group-hover:opacity-100 group-hover:scale-x-100'
-    }`} />
-  </button>
-)
-
-const SocialIcon = ({ social }: { social: SocialLink }) => (
+/**
+ * Refined Nav Item
+ */
+const NavLink = ({ item, active }: { item: NavItem; active: boolean }) => (
   <a
-    href={social.href}
-    target="_blank"
-    rel="noopener noreferrer"
-    className="group relative w-9 h-9 flex items-center justify-center text-neutral-500 hover:text-neutral-900 transition-all duration-200 rounded-lg hover:bg-neutral-100"
-    aria-label={social.label}
+    href={item.href}
+    className="relative px-4 py-2 text-[13px] font-semibold transition-colors duration-200 uppercase tracking-wide hover:text-[var(--color-brand-primary)]"
+    style={{ color: active ? "var(--color-brand-primary)" : "var(--color-text-secondary)" }}
   >
-    <social.icon className="w-[18px] h-[18px]" strokeWidth={1.5} />
+    {item.name}
+    {active && (
+      <span 
+        className="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full"
+        style={{ background: "var(--color-brand-primary)" }}
+      />
+    )}
   </a>
 )
 
-const MobileNavItem = ({ 
-  item, 
-  isActive, 
-  onClick 
-}: { 
-  item: NavItem; 
-  isActive: boolean; 
-  onClick: () => void 
-}) => (
-  <button
-    onClick={onClick}
-    className={`w-full text-left px-6 py-4 text-base font-medium transition-all duration-200 border-l-2 ${
-      isActive 
-        ? 'text-neutral-900 border-neutral-900 bg-neutral-50' 
-        : 'text-neutral-500 border-transparent hover:text-neutral-900 hover:border-neutral-300 hover:bg-neutral-50'
-    }`}
-  >
-    {item.name}
-  </button>
-)
-
-const CTAButton = () => (
-  <button className="hidden lg:flex items-center gap-2 px-5 py-2.5 bg-neutral-900 text-white text-sm font-medium rounded-lg hover:bg-neutral-800 transition-all duration-200 hover:shadow-lg hover:shadow-neutral-900/20 hover:-translate-y-0.5">
-    Let's Talk
-    <span className="text-lg leading-none">→</span>
-  </button>
-)
-
-// ============================================
-// CUSTOM HOOKS
-// ============================================
-const useScrollAndSection = () => {
+/* ============================================
+   MAIN HEADER COMPONENT
+============================================ */
+export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
-  const [activeSection, setActiveSection] = useState('hero')
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [activeSection, setActiveSection] = useState("home")
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20)
       
-      const sections = navigation.map(item => item.href.replace('#', ''))
-      const currentSection = sections.find(section => {
+      const sections = NAVIGATION.map(n => n.href.substring(1))
+      for (const section of sections) {
         const element = document.getElementById(section)
         if (element) {
           const rect = element.getBoundingClientRect()
-          return rect.top <= 120 && rect.bottom >= 120
+          if (rect.top <= 120 && rect.bottom >= 120) {
+            setActiveSection(section)
+          }
         }
-        return false
-      })
-      
-      if (currentSection) setActiveSection(currentSection)
+      }
     }
 
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    handleScroll()
-    return () => window.removeEventListener('scroll', handleScroll)
+    window.addEventListener("scroll", handleScroll, { passive: true })
+    return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  return { isScrolled, activeSection }
-}
-
-// ============================================
-// MAIN HEADER COMPONENT
-// ============================================
-export default function Header() {
-  const [isOpen, setIsOpen] = useState(false)
-  const { isScrolled, activeSection } = useScrollAndSection()
-
-  const scrollToSection = (href: string) => {
-    const element = document.getElementById(href.replace('#', ''))
-    element?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    setIsOpen(false)
-  }
-
   return (
-    <>
-      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-white/80 backdrop-blur-xl shadow-sm border-b border-neutral-200/60' 
-          : 'bg-white/60 backdrop-blur-md border-b border-transparent'
-      }`}>
-        <Container>
-          <div className="flex items-center justify-between h-16 lg:h-20">
-            
-            <Logo onClick={() => scrollToSection('#hero')} />
-
-            {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center gap-1">
-              {navigation.map((item) => (
-                <NavLink
-                  key={item.name}
-                  item={item}
-                  isActive={activeSection === item.href.replace('#', '')}
-                  onClick={() => scrollToSection(item.href)}
-                />
-              ))}
-            </nav>
-
-            {/* Desktop Right Section */}
-            <div className="hidden lg:flex items-center gap-2">
-              <div className="flex items-center gap-1 mr-2">
-                {socialLinks.map((social) => (
-                  <SocialIcon key={social.label} social={social} />
-                ))}
-              </div>
-              <div className="w-px h-6 bg-neutral-200" />
-              <CTAButton />
-            </div>
-
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="lg:hidden w-10 h-10 flex items-center justify-center text-neutral-700 hover:text-neutral-900 transition-colors duration-200 rounded-lg hover:bg-neutral-100"
-              aria-label="Toggle menu"
-            >
-              {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-            </button>
-          </div>
-        </Container>
-
-        {/* Mobile Navigation */}
-        {isOpen && (
-          <div className="lg:hidden border-t border-neutral-200 bg-white/95 backdrop-blur-xl shadow-lg animate-fadeIn">
-            <Container className="py-4">
-              <nav className="space-y-1">
-                {navigation.map((item) => (
-                  <MobileNavItem
-                    key={item.name}
-                    item={item}
-                    isActive={activeSection === item.href.replace('#', '')}
-                    onClick={() => scrollToSection(item.href)}
-                  />
-                ))}
-              </nav>
-              
-              <div className="flex items-center justify-center gap-2 pt-6 mt-6 border-t border-neutral-200">
-                {socialLinks.map((social) => (
-                  <SocialIcon key={social.label} social={social} />
-                ))}
-              </div>
-
-              <div className="mt-6 px-6">
-                <button className="w-full flex items-center justify-center gap-2 px-5 py-3.5 bg-neutral-900 text-white text-sm font-medium rounded-lg hover:bg-neutral-800 transition-all duration-200">
-                  Let's Talk
-                  <span className="text-lg leading-none">→</span>
-                </button>
-              </div>
-            </Container>
-          </div>
-        )}
-      </header>
-
-      <style jsx global>{`
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    <header
+      className="fixed top-0 left-0 right-0 z-[100] transition-all duration-300"
+      style={{
+        paddingTop: isScrolled ? "10px" : "20px",
+        paddingBottom: isScrolled ? "10px" : "20px",
+        background: isScrolled ? "var(--color-bg-surface)" : "transparent",
+        backdropFilter: isScrolled ? "blur(8px)" : "none",
+        borderBottom: isScrolled ? "1px solid var(--color-border)" : "1px solid transparent",
+        boxShadow: isScrolled ? "var(--shadow-sm)" : "none"
+      }}
+    >
+      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         
-        * {
-          font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-          -webkit-font-smoothing: antialiased;
-          -moz-osx-font-smoothing: grayscale;
-        }
+        <Logo />
 
-        @keyframes fadeIn {
-          from {
-            opacity: 0;
-            transform: translateY(-8px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
+        {/* Desktop Navigation Group */}
+        <div className="hidden lg:flex items-center gap-1 bg-[var(--color-bg-primary)] p-1 rounded-full border border-[var(--color-border)]">
+          {NAVIGATION.map((item) => (
+            <NavLink 
+              key={item.name} 
+              item={item} 
+              active={activeSection === item.href.substring(1)} 
+            />
+          ))}
+        </div>
 
-        .animate-fadeIn {
-          animation: fadeIn 0.2s ease-out;
-        }
+        {/* Right Section */}
+        <div className="flex items-center gap-3">
+          <div className="hidden md:flex items-center gap-3 pr-3 border-r border-[var(--color-border)] text-[var(--color-text-secondary)]">
+             <a href="https://github.com" className="hover:text-[var(--color-brand-primary)] transition-colors">
+               <Github size={18} />
+             </a>
+             <a href="https://linkedin.com" className="hover:text-[var(--color-brand-primary)] transition-colors">
+               <Linkedin size={18} />
+             </a>
+          </div>
 
-        html {
-          scroll-behavior: smooth;
-        }
+          <button
+            className="flex items-center gap-2 px-4 py-2 md:px-5 md:py-2.5 rounded-md text-[11px] md:text-[12px] font-bold uppercase tracking-widest transition-transform hover:scale-105 active:scale-95"
+            style={{ 
+              background: "var(--color-text-primary)", 
+              color: "var(--color-text-inverse)" 
+            }}
+          >
+            Connect
+            <ArrowRight size={14} className="hidden xs:block" />
+          </button>
 
-        body {
-          background: #fafafa;
-        }
-      `}</style>
-    </>
+          {/* Mobile Menu Toggle */}
+          <button 
+            className="lg:hidden p-1"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            style={{ color: "var(--color-text-primary)" }}
+          >
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Navigation Drawer */}
+      {isMenuOpen && (
+        <div 
+          className="absolute top-full left-0 right-0 p-6 flex flex-col gap-1 lg:hidden border-b border-[var(--color-border)] animate-in slide-in-from-top-2"
+          style={{ background: "var(--color-bg-surface)" }}
+        >
+          {NAVIGATION.map((item) => (
+            <a
+              key={item.name}
+              href={item.href}
+              className="text-sm font-bold uppercase tracking-wide py-3 border-b border-[var(--color-bg-primary)] last:border-0"
+              style={{ color: activeSection === item.href.substring(1) ? "var(--color-brand-primary)" : "var(--color-text-primary)" }}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              {item.name}
+            </a>
+          ))}
+        </div>
+      )}
+    </header>
   )
 }

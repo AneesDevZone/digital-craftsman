@@ -67,8 +67,7 @@ export function AboutSectionContent() {
     <section 
       ref={sectionRef}
       id="about" 
-      // Changed bg-white to bg-zinc-50 for a subtle off-white and added border for depth
-      className="py-24 bg-zinc-50 relative overflow-hidden border-t border-b border-gray-100"
+      className="pt-16 lg:pt-20 pb-24 bg-zinc-50 relative overflow-hidden border-t border-b border-gray-100"
     >
       {/* Dynamic Abstract Background Elements */}
       {/* Replaced small dots with larger, subtle shapes for a modern, flowing look */}
