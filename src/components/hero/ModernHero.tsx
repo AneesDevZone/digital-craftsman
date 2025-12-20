@@ -8,22 +8,12 @@ import {
   Zap,
   Shield,
 } from "lucide-react"
+// Import your refined container
+import { Container } from "@/components/ui/Container"
 
 /* ============================================================================
    PRIMITIVES (DRY)
 ============================================================================ */
-
-const Container = ({
-  children,
-  className = "",
-}: {
-  children: React.ReactNode
-  className?: string
-}) => (
-  <div className={`mx-auto max-w-[1400px] px-6 lg:px-12 ${className}`}>
-    {children}
-  </div>
-)
 
 const Glass = ({
   children,
@@ -66,7 +56,6 @@ const BusinessIllustration = () => {
   return (
     <div className="relative flex items-center justify-center min-h-[420px]">
       <Glass className="w-full max-w-md p-6 sm:p-8 hover:scale-[1.03]">
-        {/* Browser bar */}
         <div className="flex items-center gap-2 mb-5">
           <div className="flex gap-1.5">
             <span className="w-3 h-3 rounded-full bg-[var(--color-danger)]" />
@@ -76,7 +65,6 @@ const BusinessIllustration = () => {
           <div className="ml-2 h-6 flex-1 rounded bg-[var(--color-bg-primary)]" />
         </div>
 
-        {/* Content */}
         <div className="space-y-4">
           <div
             className="h-8 rounded"
@@ -100,7 +88,6 @@ const BusinessIllustration = () => {
           </div>
         </div>
 
-        {/* Floating icons */}
         <Glass className="absolute -top-5 -right-5 w-14 h-14 flex items-center justify-center animate-float">
           <Shield className="w-7 h-7 text-[var(--color-brand-signature)]" />
         </Glass>
@@ -139,7 +126,6 @@ export default function HeroSection() {
         )`,
       }}
     >
-      {/* Ambient glows */}
       <Glow
         className="top-24 right-20 w-96 h-96"
         color="radial-gradient(circle, var(--color-brand-primary), transparent 70%)"
@@ -149,11 +135,10 @@ export default function HeroSection() {
         color="radial-gradient(circle, var(--color-brand-accent), transparent 70%)"
       />
 
-      <Container className="relative z-10">
+      {/* Using the refined Container here */}
+      <Container size="xl" className="relative z-10">
         <div className="grid lg:grid-cols-2 gap-14 items-center">
-          {/* LEFT */}
           <div className="space-y-8">
-            {/* Badge */}
             <Glass className="inline-flex items-center gap-2 px-4 py-2 rounded-full">
               <span className="w-2 h-2 rounded-full bg-[var(--color-brand-signature)] animate-pulse" />
               <span className="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-secondary)]">
@@ -161,8 +146,7 @@ export default function HeroSection() {
               </span>
             </Glass>
 
-            {/* Heading */}
-            <h1 className="text-4xl sm:text-5xl xl:text-7xl font-extrabold leading-tight">
+            <h1 className="text-4xl sm:text-6xl xl:text-7xl font-bold tracking-tighter leading-[1.1]">
               Craft Digital Excellence{" "}
               <span
                 className="block"
@@ -177,11 +161,10 @@ export default function HeroSection() {
             </h1>
 
             <p className="text-lg sm:text-xl text-[var(--color-text-secondary)] max-w-xl">
-              Modern web and mobile solutions built with production-grade
-              technology. From startups to enterprises.
+              Modern web and mobile solutions.
+              Built with production-grade technology.
             </p>
 
-            {/* Stats */}
             <div className="grid grid-cols-3 gap-4 max-w-md">
               {[
                 { icon: Layers, label: "Full-Stack" },
@@ -195,17 +178,6 @@ export default function HeroSection() {
               ))}
             </div>
 
-            {/* Pricing */}
-            <div className="flex items-baseline gap-3">
-              <span className="text-sm uppercase tracking-wider text-[var(--color-text-secondary)]">
-                Starting at
-              </span>
-              <span className="text-5xl font-black text-[var(--color-brand-primary)]">
-                €199
-              </span>
-            </div>
-
-            {/* CTA */}
             <div className="flex flex-col sm:flex-row gap-4">
               <button
                 onClick={() => scrollTo("contact")}
@@ -220,10 +192,10 @@ export default function HeroSection() {
                 </span>
               </button>
 
-              <Glass>
+              <Glass className="rounded-[var(--radius-md)]">
                 <button
                   onClick={() => scrollTo("projects")}
-                  className="px-8 py-4 w-full rounded-[var(--radius-md)] font-semibold"
+                  className="px-8 py-4 w-full font-semibold"
                 >
                   View Projects →
                 </button>
@@ -231,28 +203,17 @@ export default function HeroSection() {
             </div>
           </div>
 
-          {/* RIGHT */}
           <BusinessIllustration />
         </div>
       </Container>
 
-      {/* Animations */}
       <style jsx>{`
         @keyframes float {
-          0%,
-          100% {
-            transform: translateY(0);
-          }
-          50% {
-            transform: translateY(-18px);
-          }
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-18px); }
         }
-        .animate-float {
-          animation: float 3s ease-in-out infinite;
-        }
-        .animate-float-delayed {
-          animation: float 4s ease-in-out infinite;
-        }
+        .animate-float { animation: float 3s ease-in-out infinite; }
+        .animate-float-delayed { animation: float 4s ease-in-out infinite; }
       `}</style>
     </section>
   )
