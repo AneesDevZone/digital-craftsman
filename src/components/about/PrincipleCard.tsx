@@ -4,7 +4,7 @@ import { Principle } from '@/data/about-principles';
 interface PrincipleCardProps extends HTMLAttributes<HTMLDivElement> {
   principle: Principle;
   index: number;
-  isVisible: boolean; // Controls animation state
+  isVisible: boolean;
   activeCard: number | null;
   setActiveCard: (index: number | null) => void;
 }
@@ -21,53 +21,64 @@ export function PrincipleCard({
   const handleMouseEnter = useCallback(() => setActiveCard(index), [setActiveCard, index]);
   const handleMouseLeave = useCallback(() => setActiveCard(null), [setActiveCard]);
   
-  const { icon: Icon, gradient, title, description } = principle;
+  const { icon: Icon, title, description } = principle;
 
-  // Combining base classes and dynamic state/style
-  // w-full makes it responsive within the grid, mx-auto centers it if needed, no 'absolute' class
-  const baseClasses = `w-full max-w-md mx-auto group cursor-pointer transition-all duration-700 
-    hover:scale-105 
-    ${activeCard === index ? 'z-20' : 'z-10'}`;
-
-  // Styles driven by the isVisible prop for the animation (positioning logic removed)
   const animationStyle = {
     opacity: isVisible ? 1 : 0,
-    transform: isVisible ? 'translateY(0)' : 'translateY(50px)',
-    transitionDelay: `${index * 300}ms`
+    transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
+    transitionDelay: `${index * 150}ms`
   };
 
   return (
     <div
-      key={index}
-      className={baseClasses}
+      className={`relative w-full transition-all duration-500 ${activeCard === index ? 'z-20 scale-[1.02]' : 'z-10'}`}
       style={animationStyle}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       {...props}
     >
-      {/* Card Glow Effect */}
-      <div className={`absolute inset-0 bg-gradient-to-r ${gradient} rounded-3xl opacity-0 group-hover:opacity-20 transition-opacity duration-500 blur-xl`}></div>
+      {/* 1. Technical Glow (Now matches your brand variables) */}
+      <div 
+        className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-15 blur-xl transition-opacity duration-500"
+        style={{ background: 'var(--gradient-brand-primary)' }}
+      />
       
-      {/* Main Card Content */}
-      <div className="relative bg-white rounded-3xl p-8 shadow-lg border border-slate-100 group-hover:shadow-2xl group-hover:border-slate-200 transition-all duration-500">
-        
-        {/* Floating Icon */}
-        <div className={`absolute -top-6 left-8 p-4 bg-gradient-to-r ${gradient} rounded-2xl shadow-xl group-hover:rotate-12 group-hover:scale-110 transition-all duration-500`}>
-          <Icon className="w-6 h-6 text-white" />
+      {/* 2. Glass Card Body */}
+      <div 
+        className="relative backdrop-blur-md rounded-2xl p-6 border transition-all duration-500 overflow-hidden h-full shadow-sm group-hover:shadow-md"
+        style={{ 
+          backgroundColor: 'color-mix(in srgb, var(--color-bg-surface) 60%, transparent)',
+          borderColor: 'var(--color-border)'
+        }}
+      >
+        {/* 3. Small "Code-like" Badge Icon */}
+        <div className="flex items-center gap-3 mb-4">
+          <div 
+            className="p-2.5 rounded-lg border shadow-inner transition-transform duration-500 group-hover:rotate-6"
+            style={{ 
+              background: 'var(--color-bg-primary)',
+              borderColor: 'var(--color-border)'
+            }}
+          >
+            <Icon className="w-5 h-5" style={{ color: 'var(--color-brand-primary)' }} />
+          </div>
+          <div className="h-px flex-1" style={{ background: 'var(--color-border)' }} />
+          <span className="text-[10px] font-mono opacity-30">0{index + 1}</span>
         </div>
         
-        {/* Content */}
-        <div className="pt-8">
-          <h3 className="text-2xl font-bold text-slate-900 mb-3 group-hover:text-slate-800 transition-colors duration-300">
-            {title}
-          </h3>
-          <p className="text-slate-600 leading-relaxed group-hover:text-slate-700 transition-colors duration-300">
-            {description}
-          </p>
-        </div>
+        {/* 4. Text Content */}
+        <h3 className="text-lg font-bold mb-2 tracking-tight" style={{ color: 'var(--color-text-primary)' }}>
+          {title}
+        </h3>
+        <p className="text-sm leading-relaxed" style={{ color: 'var(--color-text-secondary)' }}>
+          {description}
+        </p>
 
-        {/* Subtle Accent Line - FIX applied: Added mx-2 to constrain width inside rounded corners */}
-        <div className={`absolute bottom-0 inset-x-0 mx-2 h-1 bg-gradient-to-r ${gradient} rounded-b-3xl transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500`}></div>
+        {/* 5. Animated Bottom Border */}
+        <div 
+          className="absolute bottom-0 left-0 h-1 w-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"
+          style={{ background: 'var(--gradient-brand-primary)' }}
+        />
       </div>
     </div>
   );

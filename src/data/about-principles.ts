@@ -1,31 +1,30 @@
-import { Zap, Target, Users, LucideIcon } from 'lucide-react';
+import { Zap, Cpu, Code2 } from 'lucide-react';
+import { LucideIcon } from 'lucide-react';
 
-// Define the shape of our data (Positioning data removed)
 export interface Principle {
   icon: LucideIcon;
   title: string;
   description: string;
-  gradient: string; // Tailwind gradient classes
+  gradient: string; // Keeping this for the hover glow logic
 }
 
-// Full data set
 export const ABOUT_PRINCIPLES: Principle[] = [
   {
+    icon: Code2,
+    title: "Precision Code",
+    description: "Every line is optimized for speed and SEO. Like a square root, we reduce complexity to find the most efficient solution.",
+    gradient: "from-blue-500 to-emerald-500"
+  },
+  {
     icon: Zap,
-    title: 'Innovation First',
-    description: 'Cutting-edge solutions for modern challenges',
-    gradient: 'from-yellow-400 to-orange-500',
+    title: "Hybrid Strategy",
+    description: "Choose speed with our premium templates or power with bespoke Next.js builds. We bridge the gap between quality and time.",
+    gradient: "from-amber-500 to-orange-500"
   },
   {
-    icon: Target,
-    title: 'Results Driven',
-    description: 'Every project delivers measurable business value',
-    gradient: 'from-blue-500 to-purple-600',
-  },
-  {
-    icon: Users,
-    title: 'Client Focused',
-    description: 'Building lasting partnerships through excellence',
-    gradient: 'from-emerald-500 to-teal-600',
+    icon: Cpu,
+    title: "Root Scalability",
+    description: "We build architectures that don't just work today, but scale tomorrow. Your growth is engineered into our foundation.",
+    gradient: "from-violet-500 to-purple-500"
   }
 ];
